@@ -39,7 +39,7 @@ const CustomComponents = {
       <Image
         src={src}
         alt={alt}
-        width={100}
+        width={900}
         height={100}
         className="my-4 w-full rounded-xl"
       />
