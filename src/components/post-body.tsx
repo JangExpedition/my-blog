@@ -25,7 +25,7 @@ const CustomComponents = {
         style={dark}
         PreTag="div"
         {...props}
-        className="my-4 rounded-xl"
+        className="my-4 rounded-lg"
       >
         {String(props.children).replace(/\n$/, "")}
       </SyntaxHighlighter>
@@ -43,6 +43,19 @@ const CustomComponents = {
         className="my-4 w-full rounded-xl"
       />
     );
+  },
+  ul({ ...props }) {
+    return (
+      <ul className="list-disc list-inside my-4 ml-4">{props.children}</ul>
+    );
+  },
+  ol({ ...props }) {
+    return (
+      <ol className="list-decimal list-inside my-4 ml-4">{props.children}</ol>
+    );
+  },
+  li({ ...props }) {
+    return <li className="my-2">{props.children}</li>;
   },
 };
 
