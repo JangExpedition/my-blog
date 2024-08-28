@@ -16,7 +16,7 @@ export default function PostHeader({
         <Image
           src={coverImage}
           alt={`Cover Image for ${title}`}
-          width={100}
+          width={900}
           height={100}
           className="object-cover w-full"
         />
