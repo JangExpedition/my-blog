@@ -1,6 +1,5 @@
 import { getPostBySlug } from "@/lib/api";
 import { notFound } from "next/navigation";
-import markdownToHtml from "@/lib/markdownToHtml";
 import PostHeader from "@/components/post-header";
 import PostBody from "@/components/post-body";
 
@@ -8,8 +7,6 @@ export default async function Post({ params }: { params: { slug: string } }) {
   const post = getPostBySlug(params.slug);
 
   if (!post) return notFound();
-
-  const content = await markdownToHtml(post.content || "");
 
   return (
     <div className="p-5">
@@ -19,7 +16,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
         date={post.date}
         author={post.author}
       />
-      <PostBody content={content} />
+      <PostBody content={post.content} />
     </div>
   );
 }

@@ -26,8 +26,8 @@ export default function PostHeader({
       <h1 className="mt-5 font-[700] text-5xl leading-tight break-words">
         {title}
       </h1>
-      <div className="mt-5 flex flex-col gap-[2px]">
-        <div className="flex justify-start items-center gap-1">
+      <div className="mt-5 flex flex-col gap-1">
+        <div className="flex justify-start items-center gap-2">
           <Image
             src={author.picture}
             alt="작성자 사진"
@@ -35,7 +35,7 @@ export default function PostHeader({
             height={30}
             className="rounded-[50%]"
           />
-          <p className="text-[17px] whitespace-nowrap font-semibold">
+          <p className="text-[17px] whitespace-nowrap font-semibold leading-[30px]">
             {author.name}
           </p>
         </div>
