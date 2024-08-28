@@ -1,5 +1,4 @@
 import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 import Image from "next/image";
 import SyntaxHighlighter from "react-syntax-highlighter/dist/esm/default-highlight";
 import { dark } from "react-syntax-highlighter/dist/esm/styles/hljs";
@@ -50,13 +49,7 @@ const CustomComponents = {
 export default function PostBody({ content }: { content: string }) {
   return (
     <div className="w-full mt-8">
-      <ReactMarkdown
-        className="prose"
-        remarkPlugins={[remarkGfm]}
-        components={CustomComponents}
-      >
-        {content}
-      </ReactMarkdown>
+      <ReactMarkdown components={CustomComponents}>{content}</ReactMarkdown>
     </div>
   );
 }
