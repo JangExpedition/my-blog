@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div className="grid grid-cols-2 max-w-full">
       {allPosts.map((post) => (
-        <PostPreview key={post.slug} {...post} />
+        <PostPreview key={post.path} {...post} />
       ))}
     </div>
   );

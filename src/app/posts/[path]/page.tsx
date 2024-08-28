@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 import PostHeader from "@/components/post-header";
 import PostBody from "@/components/post-body";
 
-export default async function Post({ params }: { params: { slug: string } }) {
-  const post = getPostBySlug(params.slug);
+export default async function Post({ params }: { params: { path: string } }) {
+  const post = getPostBySlug(params.path);
 
   if (!post) return notFound();
 
@@ -14,7 +14,6 @@ export default async function Post({ params }: { params: { slug: string } }) {
         title={post.title}
         coverImage={post.coverImage}
         date={post.date}
-        author={post.author}
       />
       <PostBody content={post.content} />
     </div>

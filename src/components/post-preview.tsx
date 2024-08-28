@@ -2,20 +2,10 @@ import { Post } from "@/interfaces/post";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function PostPreview({
-  slug,
-  title,
-  date,
-  coverImage,
-  author,
-  excerpt,
-  ogImage,
-  content,
-  preview,
-}: Post) {
+export default function PostPreview({ title, date, coverImage, path }: Post) {
   return (
     <div className="mt-[40px]">
-      <Link href={`/posts/${slug}`} aria-label={title}>
+      <Link href={`/posts/${path}`} aria-label={title}>
         <Image
           src={coverImage}
           alt={`Cover Image for ${title}`}
