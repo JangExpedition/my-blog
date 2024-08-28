@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/header";
+import DarkThemeProvider from "@/components/dark-theme-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,12 +22,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Header />
-        <main>
-          <div className="max-w-[900px] mt-[60px] mx-auto min-h-[calc(100vh-60px)]">
-            {children}
-          </div>
-        </main>
+        <DarkThemeProvider>
+          <Header />
+          <main>
+            <div className="max-w-[900px] mt-[60px] mx-auto min-h-[calc(100vh-60px)]">
+              {children}
+            </div>
+          </main>
+        </DarkThemeProvider>
       </body>
     </html>
   );
