@@ -1,4 +1,4 @@
 User-Agent: *
 Allow: /
 
-Sitemap: https://Tazoal.vercel.app/sitemap.xml
+Sitemap: https://tazoal.vercel.app/sitemap.xml
