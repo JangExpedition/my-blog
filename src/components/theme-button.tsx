@@ -1,9 +1,14 @@
 "use client";
 import { useTheme } from "next-themes";
 import Image from "next/image";
+import { useEffect } from "react";
 
 export default function ThemeButton() {
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, resolvedTheme } = useTheme();
+
+  useEffect(() => {
+    setTheme(resolvedTheme === "light" ? "light" : "dark");
+  }, []);
 
   return (
     <button
