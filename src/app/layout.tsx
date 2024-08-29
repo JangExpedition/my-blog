@@ -13,6 +13,10 @@ export const metadata: Metadata = {
     icon: "./favicon.ico",
   },
   openGraph: {
+    title: "Tazoal Log",
+    description: "웹 프론트엔드 개발자 장원정입니다.",
+    siteName: "Tazoal Log",
+    type: "website",
     images: "/assets/blog/author/profile.png",
   },
   verification: { google: "5Rxhu8VWiPcCxzU0LeH3eHf8lNFPickkrLJmxds1-Z8" },
