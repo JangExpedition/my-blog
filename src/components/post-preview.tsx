@@ -2,22 +2,37 @@ import { Post } from "@/interfaces/post";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function PostPreview({ title, date, coverImage, path }: Post) {
+export default function PostPreview({
+  title,
+  date,
+  coverImage,
+  path,
+  description,
+}: Post) {
   return (
-    <div className="mt-[40px]">
-      <Link href={`/posts/${path}`} aria-label={title}>
-        <Image
-          src={coverImage}
-          alt={`Cover Image for ${title}`}
-          width={1300}
-          height={630}
-          className="h-[316px] min-w-[320px] rounded-[20px]"
-        />
-        <div>
-          <div className="mt-4 border-[2px] rounded-[20px] border-black p-2 w-fit font-[800]">
-            {date}
-          </div>
-          <h2 className="mt-[10px] font-[700] text-2xl">{title}</h2>
+    <div className="mt-[40px] w-full">
+      <Link
+        href={`/posts/${path}`}
+        aria-label={title}
+        className="flex justify-between items-start py-6 group"
+      >
+        <div className="flex-1 flex flex-col justify-start items-start pr-5">
+          <span className="mb-[6px] font-[700] text-xl break-words overflow-hidden text-ellipsis group-hover:text-blue-700">
+            {title}
+          </span>
+          <span className="text-gray-500 mb-[17px] font-normal text-sm">
+            {description}
+          </span>
+          <span className="flex text-gray-700 font-normal text-[13px]">{`${date} · 장원정`}</span>
+        </div>
+        <div className="rounded-[20px] w-[130px] h-[90px] mb-auto overflow-hidden">
+          <Image
+            src={coverImage}
+            alt={`Cover Image for ${title}`}
+            width={130}
+            height={90}
+            className="w-full h-full group-hover:scale-110"
+          />
         </div>
       </Link>
     </div>

@@ -5,7 +5,7 @@ export default function Home() {
   const allPosts = getAllPosts();
 
   return (
-    <div className="grid grid-cols-2 gap-x-8 gap-y-10 max-w-full">
+    <div className="flex flex-col justify-start items-center max-w-[700px] px-6">
       {allPosts.map((post) => (
         <PostPreview key={post.path} {...post} />
       ))}

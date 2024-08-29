@@ -2,7 +2,7 @@
 title: "JavaScript"
 description: "프론트엔드 개발의 핵심인 JavaScript 내용을 정리했습니다."
 coverImage: "/assets/blog/javascript/cover.png"
-date: "2024/08/01"
+date: "2024년 08월 01일"
 ---
 
 https://www.inflearn.com/course/%ED%95%B5%EC%8B%AC%EA%B0%9C%EB%85%90-javascript-flow#
