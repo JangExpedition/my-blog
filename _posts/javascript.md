@@ -10,27 +10,11 @@ https://www.inflearn.com/course/%ED%95%B5%EC%8B%AC%EA%B0%9C%EB%85%90-javascript-
 
 인프런의 코어 자바스크립트 강의를 듣고 정리한 내용입니다.
 
+---
+
 # 데이터 타입
 
 ---
-
-### 기본형 (Primitive Type)
-
-- Number
-- String
-- Boolean
-- null
-- undefined
-- Symbol(ES6)
-
-### 참조형 (Reference Type)
-
-- Object
-  - Array
-  - Function
-  - RegExp
-  - Set / WeakSet (ES6)
-  - Map / WeakMap (ES6)
 
 ## 메모리 동작 방식
 
@@ -42,9 +26,25 @@ https://www.inflearn.com/course/%ED%95%B5%EC%8B%AC%EA%B0%9C%EB%85%90-javascript-
 
 ## 기본형
 
+> - Number
+> - String
+> - Boolean
+> - null
+> - undefined
+> - Symbol(ES6)
+
 ```
 var a;
 ```
 
 위와 같이 변수 a를 선언합니다.
 컴퓨터는 메모리 안에서 데이터가 담길 공간을 미리 확보 합니다.
+
+## 참조형
+
+> - Object
+>   - Array
+>   - Function
+>   - RegExp
+>   - Set / WeakSet (ES6)
+>   - Map / WeakMap (ES6)
