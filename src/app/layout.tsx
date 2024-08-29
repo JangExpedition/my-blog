@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   icons: {
     icon: "./favicon.ico",
   },
+  openGraph: {
+    images: "/assets/blog/author/profile.png",
+  },
   verification: { google: "5Rxhu8VWiPcCxzU0LeH3eHf8lNFPickkrLJmxds1-Z8" },
 };
 
