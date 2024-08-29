@@ -33,7 +33,7 @@ export default function RootLayout({
         <DarkThemeProvider>
           <Header />
           <main>
-            <div className="max-w-[900px] mt-[60px] mx-auto min-h-[calc(100vh-60px)]">
+            <div className="max-w-[1200px] mt-[60px] mx-auto min-h-[calc(100vh-60px)]">
               {children}
             </div>
           </main>

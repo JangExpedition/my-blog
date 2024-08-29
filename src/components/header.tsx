@@ -7,7 +7,7 @@ export default function Header() {
       <div className="w-[92%] h-full flex justify-between items-center mx-auto">
         <Link href={"/"}>
           <p className="text-[24px] font-[700] italic hover:underline">
-            Tazoal.
+            Tazoal<span className="text-blue-700">.</span>
           </p>
         </Link>
         <ul>

@@ -1,6 +1,6 @@
 ---
 title: "JavaScript"
-description: "프론트엔드 개발의 핵심인 JavaScript 내용을 정리했습니다."
+description: "인프런의 코어 자바스크립트 강의를 듣고 정리한 내용입니다. 데이터 타입부터 컨텍스트, 클로저, 프로토 타입 등을 알 수 있습니다."
 coverImage: "/assets/blog/javascript/cover.png"
 date: "2024년 08월 01일"
 ---

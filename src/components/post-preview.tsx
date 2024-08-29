@@ -20,7 +20,7 @@ export default function PostPreview({
           <span className="mb-[6px] font-[700] text-xl break-words overflow-hidden text-ellipsis group-hover:text-blue-700">
             {title}
           </span>
-          <span className="text-gray-500 mb-[17px] font-normal text-sm">
+          <span className="text-gray-500 mb-[17px] font-normal text-[15px]">
             {description}
           </span>
           <span className="flex text-gray-700 font-normal text-[13px]">{`${date} · 장원정`}</span>
