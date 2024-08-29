@@ -7,11 +7,12 @@ import DarkThemeProvider from "@/components/dark-theme-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Tazoal Log",
+  title: { default: "Tazoal Log", template: "Tazoal Log | %s" },
   description: "웹 프론트엔드 개발자 장원정입니다.",
-  openGraph: {
-    images: "/assets/blog/author/profile.png",
+  icons: {
+    icon: "./favicon.ico",
   },
+  verification: { google: "5Rxhu8VWiPcCxzU0LeH3eHf8lNFPickkrLJmxds1-Z8" },
 };
 
 export default function RootLayout({
