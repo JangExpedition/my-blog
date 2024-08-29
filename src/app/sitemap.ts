@@ -6,7 +6,7 @@ export default async function sitemap() {
   const posts = await getAllPosts();
   const postUrls = posts.map((post) => ({
     url: `${baseUrl}/posts/${post.path}`,
-    lastModified: post.date,
+    lastModified: post.createdAt,
   }));
   return [
     { url: baseUrl, lastModified: new Date() },
