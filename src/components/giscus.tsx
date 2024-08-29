@@ -1,25 +1,22 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
+
+const COMMENTS_ID = "comments-container";
 
 export default function Giscus() {
-  const ref = useRef<HTMLDivElement>(null);
   const { resolvedTheme } = useTheme();
+  const theme = resolvedTheme === "dark" ? "dark_dimmed" : "light_protanopia";
 
-  const theme = resolvedTheme === "dark" ? "dark" : "light";
-
-  useEffect(() => {
-    if (!ref.current || ref.current.hasChildNodes()) return;
-
+  const LoadComments = useCallback(() => {
     const scriptElement = document.createElement("script");
     scriptElement.src = "https://giscus.app/client.js";
     scriptElement.async = true;
-    scriptElement.crossOrigin = "anonymous";
 
     scriptElement.setAttribute("data-repo", "JangExpedition/my-blog");
     scriptElement.setAttribute("data-repo-id", "R_kgDOMo3Pqg");
-    scriptElement.setAttribute("data-category", "General");
+    scriptElement.setAttribute("data-category", "Comments");
     scriptElement.setAttribute("data-category-id", "DIC_kwDOMo3Pqs4CiBRt");
     scriptElement.setAttribute("data-mapping", "pathname");
     scriptElement.setAttribute("data-strict", "0");
@@ -28,19 +25,20 @@ export default function Giscus() {
     scriptElement.setAttribute("data-input-position", "bottom");
     scriptElement.setAttribute("data-theme", theme);
     scriptElement.setAttribute("data-lang", "ko");
+    scriptElement.setAttribute("crossorigin", "anonymous");
 
-    ref.current.appendChild(scriptElement);
-  }, []);
+    const comments = document.getElementById(COMMENTS_ID);
+    if (comments) comments.appendChild(scriptElement);
 
-  useEffect(() => {
-    const iframe = document.querySelector<HTMLIFrameElement>(
-      "iframe.giscus-frame"
-    );
-    iframe?.contentWindow?.postMessage(
-      { giscus: { setConfig: { theme } } },
-      "https://giscus.app"
-    );
+    return () => {
+      const comments = document.getElementById(COMMENTS_ID);
+      if (comments) comments.innerHTML = "";
+    };
   }, [theme]);
 
-  return <section className="mt-24" ref={ref} />;
+  useEffect(() => {
+    LoadComments();
+  }, [LoadComments]);
+
+  return <section className="mt-24" id={COMMENTS_ID} />;
 }
