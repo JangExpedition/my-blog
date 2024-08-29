@@ -23,6 +23,6 @@ const config: Config = {
       "2xl": "1536px",
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };
 export default config;
