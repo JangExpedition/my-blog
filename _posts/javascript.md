@@ -1,8 +1,9 @@
 ---
 title: "JavaScript"
 description: "인프런의 코어 자바스크립트 강의를 듣고 정리한 내용입니다. 데이터 타입부터 컨텍스트, 클로저, 프로토 타입 등을 알 수 있습니다."
-coverImage: "/assets/blog/javascript/cover.png"
-date: "2024년 08월 01일"
+thumbnail: "/assets/blog/javascript/cover.png"
+tags: ["JavaScript"]
+createdAt: "2024년 08월 01일"
 ---
 
 https://www.inflearn.com/course/%ED%95%B5%EC%8B%AC%EA%B0%9C%EB%85%90-javascript-flow#

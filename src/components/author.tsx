@@ -6,11 +6,11 @@ export default function Author() {
       <Image
         src={"/assets/blog/author/profile.png"}
         alt="작성자 사진"
-        width={30}
-        height={30}
+        width={25}
+        height={25}
         className="rounded-[50%]"
       />
-      <p className="text-[17px] whitespace-nowrap font-semibold leading-[30px]">
+      <p className="text-[17px] whitespace-nowrap font-semibold leading-[25px]">
         장원정
       </p>
     </div>

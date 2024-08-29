@@ -10,11 +10,12 @@ export default async function Post({ params }: { params: { path: string } }) {
   if (!post) return notFound();
 
   return (
-    <div className="p-5">
+    <div className="p-5 max-w-[700px] mx-auto">
       <PostHeader
         title={post.title}
-        coverImage={post.coverImage}
-        date={post.date}
+        coverImage={post.thumbnail}
+        date={post.createdAt}
+        tags={post.tags}
       />
       <PostBody content={post.content} />
       <Giscus />

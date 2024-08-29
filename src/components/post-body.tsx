@@ -61,7 +61,7 @@ const CustomComponents = {
 
 export default function PostBody({ content }: { content: string }) {
   return (
-    <div className="w-full mt-8">
+    <div className="w-full mt-[54px]">
       <ReactMarkdown components={CustomComponents}>{content}</ReactMarkdown>
     </div>
   );

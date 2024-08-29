@@ -4,8 +4,8 @@ import Link from "next/link";
 
 export default function PostPreview({
   title,
-  date,
-  coverImage,
+  createdAt,
+  thumbnail,
   path,
   description,
 }: Post) {
@@ -23,11 +23,11 @@ export default function PostPreview({
           <span className="text-gray-500 mb-[17px] font-normal text-[15px]">
             {description}
           </span>
-          <span className="flex text-gray-700 font-normal text-[13px]">{`${date} · 장원정`}</span>
+          <span className="flex text-gray-700 font-normal text-[13px]">{`${createdAt} · 장원정`}</span>
         </div>
         <div className="rounded-[20px] w-[130px] h-[90px] mb-auto overflow-hidden">
           <Image
-            src={coverImage}
+            src={thumbnail}
             alt={`Cover Image for ${title}`}
             width={130}
             height={90}
