@@ -1,9 +1,23 @@
 import { getAllPosts } from "@/lib/api";
 import PostPreview from "@/components/post-preview";
 import Tag from "@/components/tag";
+import Category from "@/components/category";
 
-export default function Home() {
-  const allPosts = getAllPosts();
+export default function Home({
+  searchParams,
+}: {
+  searchParams: { category?: string; tag?: string };
+}) {
+  const { category, tag } = searchParams;
+
+  let allPosts = getAllPosts();
+  if (category && category !== "ALL") {
+    allPosts = allPosts.filter((post) => post.category === category);
+  }
+  if (tag) {
+    allPosts = allPosts.filter((post) => post.tags.includes(tag));
+  }
+
   const tags = Object.values(allPosts.map((post) => post.tags)).reduce(
     (prev, cur) => {
       return [...prev, ...cur];
@@ -15,6 +29,7 @@ export default function Home() {
   return (
     <div className="w-full flex justify-evenly">
       <div className="flex flex-col justify-start items-center max-w-[700px] px-6">
+        <Category category={category} />
         {allPosts.map((post) => (
           <PostPreview key={post.path} {...post} />
         ))}
@@ -25,8 +40,13 @@ export default function Home() {
             태그
           </span>
           <div className="mt-3">
-            {uniqueTags.map((tag) => (
-              <Tag key={tag} tag={tag} />
+            {uniqueTags.map((tagName) => (
+              <Tag
+                key={tagName}
+                tagName={tagName}
+                category={category}
+                tag={tag}
+              />
             ))}
           </div>
         </div>

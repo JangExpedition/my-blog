@@ -6,4 +6,5 @@ export type Post = {
   createdAt: string;
   path: string;
   content: string;
+  category: string;
 };

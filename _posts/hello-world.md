@@ -2,8 +2,9 @@
 title: "블로그 테스트용 글"
 description: "블로그 테스트용 글입니다."
 thumbnail: "/assets/blog/hello-world/cover.jpg"
-tags: []
+tags: ["Test"]
 createdAt: "2020년 03월 16일"
+category: "DAILY"
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilities morbi tempus. Praesent elementum facilisis leo vel fringilla. Congue mauris rhoncus aenean vel. Egestas sed tempus urna et pharetra pharetra massa massa ultricies.
