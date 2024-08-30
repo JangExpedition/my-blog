@@ -6,8 +6,8 @@ export default function Tag({
   tag,
 }: {
   tagName: string;
-  category: string | undefined;
-  tag: string | undefined;
+  category?: string | undefined;
+  tag?: string | undefined;
 }) {
   return (
     <div className="pr-2 pb-[10px] cursor-pointer w-fit inline-block">

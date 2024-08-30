@@ -29,7 +29,7 @@ export default function PostHeader({
       </h1>
       <div className="w-full mt-5">
         {tags.map((tag) => (
-          <Tag key={tag} tag={tag} />
+          <Tag key={tag} tagName={tag} />
         ))}
       </div>
       <div className="mt-5 flex flex-col gap-1">
