@@ -19,7 +19,7 @@ export default function Home() {
           <PostPreview key={post.path} {...post} />
         ))}
       </div>
-      <div className="px-6 pb-12 border-l-[1px] hid lg:block">
+      <div className="px-6 pb-12 border-l-[1px] hidden lg:block">
         <div className="w-[300px]">
           <span className="text-gray-500 font-semibold text-[13px] dark:text-white">
             태그
