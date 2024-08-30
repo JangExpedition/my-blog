@@ -3,11 +3,14 @@ import { notFound } from "next/navigation";
 import PostHeader from "@/components/post-header";
 import PostBody from "@/components/post-body";
 import Giscus from "@/components/giscus";
+import markdownToHtml from "@/lib/markdownToHtml";
 
 export default async function Post({ params }: { params: { path: string } }) {
   const post = getPostBySlug(params.path);
 
   if (!post) return notFound();
+
+  const content = await markdownToHtml(post.content);
 
   return (
     <div className="p-5 max-w-[700px] mx-auto">
@@ -17,7 +20,7 @@ export default async function Post({ params }: { params: { path: string } }) {
         date={post.createdAt}
         tags={post.tags}
       />
-      <PostBody content={post.content} />
+      <PostBody content={content} />
       <Giscus />
     </div>
   );
