@@ -1,6 +1,6 @@
 ---
 title: "데이터 타입 (Data Type)"
-description: "기본형과 참조형의 데이터 타입이 컴퓨터 메모리에 어떤 방식으로 저장되는지 자세하게 설명합니다."
+description: "기본형과 참조형 데이터가 컴퓨터 메모리에 어떤 방식으로 저장되는지 자세하게 설명합니다."
 thumbnail: "/assets/blog/data-type/cover.png"
 tags: ["JavaScript"]
 createdAt: "2024년 08월 01일"
