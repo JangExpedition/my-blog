@@ -25,7 +25,7 @@ https://www.inflearn.com/course/%ED%95%B5%EC%8B%AC%EA%B0%9C%EB%85%90-javascript-
 음식 클래스는 과일 클래스의 상위 클래스이고 보통 슈퍼 클래스라고 칭합니다.
 반대로 과일 클래스는 음식 클래스의 하위 클래스고 보통 서브 클래스라고 칭합니다.
 
-![배열 객체가 만들어지면서 Array 클래스의 요소와 결과물을 표현한 그림](/assets/blog/closuer/1.png)
+![배열 객체가 만들어지면서 Array 클래스의 요소와 결과물을 표현한 그림](/assets/blog/class/1.png)
 
 [프로토 타입](https://tazoal.vercel.app/posts/execution-context)에서 살펴본 배열 리터럴을 생성하면 Array라고 하는 생성자 함수를 new 연산자와 함께 호출한 결과와 같다고 배웠습니다.
 Array 생성자 함수 부분만 분리하면 일반적인 개념상의 클래스 역할을 합니다.
@@ -143,7 +143,7 @@ Employee.prototype에 Person의 인스턴스를 할당합니다.
 
 getPosition을 밑에 둔 이유는 `Employee.prototype = new Person();`보다 먼저 메서드를 정의해봤자 Person 인스턴스로 바뀌기 때문입니다.
 
-![클래스 상속 결과를 콘솔에 출력한 사진](/assets/blog/closuer/2.png)
+![클래스 상속 결과를 콘솔에 출력한 사진](/assets/blog/class/2.png)
 
 Employee 인스턴스인 roy를 출력하면 Employee의 age, name, position 속성에 값이 잘 할당됐습니다.
 
@@ -157,7 +157,7 @@ Prototype Chaing을 통해 한 단계 더 올라가면 Person의 prototype이자
 
 Prototype Chaing 상에는 프로퍼티가 아닌 메서드들만 존재하게 하는 것이 '추상적인 클래스'에 부합합니다.
 
-![Bridge 클래스를 이용한 클래스 상속을 표현한 그림](/assets/blog/closuer/3.png)
+![Bridge 클래스를 이용한 클래스 상속을 표현한 그림](/assets/blog/class/3.png)
 
 이를 해결하기 위해서는 Employee.prototype에 name, age 속성을 지워야 합니다.
 Employee.prototype에 반드시 Person의 인스턴스 객체가 필요한 건 아닙니다.
@@ -197,7 +197,7 @@ const roy = new Employee("로이", 30, "CEO");
 Bridge.prototype에 Person.prototype을 연결하고 인스턴스를 생성하면 아무런 프로퍼티없이 메서드만 상속받습니다.
 Employee.prototype에 Bridge의 인스턴스를 넣어주고 Employee.prototype.constructor에 Employee 생성자 함수를 넣어주면 해결됩니다.
 
-![Bridge 클래스를 이용한 클래스 상속 결과를 출력한 사진](/assets/blog/closuer/4.png)
+![Bridge 클래스를 이용한 클래스 상속 결과를 출력한 사진](/assets/blog/class/4.png)
 
 Bridge라는 매개체를 이용해서 Person의 인스턴스와 연결 관계를 끊음으로써 프로토타입 체인 상에 불필요한 프로퍼티가 등장하지 않게 성공했습니다.
 
