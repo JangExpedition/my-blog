@@ -3,7 +3,7 @@ title: "createElement 만들기"
 description: "React의 createElement 함수를 직접 만들어서 원리를 파악합니다."
 thumbnail: "/assets/blog/create-element/cover.png"
 tags: ["React"]
-createdAt: "2024년 08월 13일"
+createdAt: "2024년 08월 17일"
 category: "DEV"
 ---
 
