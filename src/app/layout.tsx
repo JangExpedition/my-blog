@@ -33,7 +33,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <DarkThemeProvider>
           <Header />
-          <main className="mb-[60px] bg-white dark:bg-black">
+          <main className="pb-[60px] bg-white dark:bg-black">
             <div className="max-w-[1200px] mt-[60px] mx-auto min-h-[calc(100vh-200px)]">
               {children}
             </div>
