@@ -154,15 +154,11 @@ export default async function Page({ params }: { params: { path: string } }) {
 빌드 타임에 `[path]`에 올 값들을 알고 있으므로 정적 페이지로 작성할 수 있습니다.
 
 ```js
-import { getAllPosts, getPostBySlug } from "@/lib/api";
-import { notFound } from "next/navigation";
-import PostHeader from "@/components/post-header";
-import PostBody from "@/components/post-body";
-import Giscus from "@/components/giscus";
-
 interface IStaticParams {
   path: string;
 }
+
+export const dynamicParams = false;
 
 export function generateStaticParams() {
   let allPosts = getAllPosts();
@@ -174,8 +170,6 @@ export function generateStaticParams() {
 
 export default async function Page({ params }: { params: { path: string } }) {
   const post = getPostBySlug(params.path);
-
-  if (!post) return notFound();
 
   return (
     <div className="p-5 max-w-[700px] mx-auto">
@@ -193,6 +187,7 @@ export default async function Page({ params }: { params: { path: string } }) {
 ```
 
 `generateStaticParams` 함수를 통해 `[path]`에 올 값들을 미리 가져와서 페이지를 생성합니다.
+`dynamicParams` 옵션을 `false`로 설정하여 미리 설정한 값 외의 요청이 있으면 404 페이지를 반환하도록 설정합니다.
 
 ![npm run build 결과 로그2](/assets/blog/make-blog/9.png)
 
