@@ -8,6 +8,8 @@ interface IStaticParams {
   path: string;
 }
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   let allPosts = getAllPosts();
   const result = allPosts.reduce((acc: IStaticParams[], cur) => {
@@ -18,8 +20,6 @@ export function generateStaticParams() {
 
 export default async function Page({ params }: { params: { path: string } }) {
   const post = getPostBySlug(params.path);
-
-  if (!post) return notFound();
 
   return (
     <div className="p-5 max-w-[700px] mx-auto">
