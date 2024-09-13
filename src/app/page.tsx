@@ -28,13 +28,13 @@ export default function Home({
 
   return (
     <div className="w-full flex justify-evenly">
-      <div className="flex flex-col justify-start items-center max-w-[700px] px-6">
+      <div className="flex flex-col justify-start items-center max-w-[700px] px-6 mx-auto">
         <Category category={category} />
         {allPosts.map((post) => (
           <PostPreview key={post.path} {...post} />
         ))}
       </div>
-      <div className="px-6 pb-12 border-l-[1px] hidden lg:block">
+      <div className="px-6 pb-12 border-l-[1px] hidden lg:block mx-auto">
         <div className="w-[300px]">
           <span className="text-gray-500 font-semibold text-[13px] dark:text-white">
             태그
