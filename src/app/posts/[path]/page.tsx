@@ -1,10 +1,22 @@
-import { getPostBySlug } from "@/lib/api";
+import { getAllPosts, getPostBySlug } from "@/lib/api";
 import { notFound } from "next/navigation";
 import PostHeader from "@/components/post-header";
 import PostBody from "@/components/post-body";
 import Giscus from "@/components/giscus";
 
-export default async function Post({ params }: { params: { path: string } }) {
+interface IStaticParams {
+  path: string;
+}
+
+export function generateStaticParams() {
+  let allPosts = getAllPosts();
+  const result = allPosts.reduce((acc: IStaticParams[], cur) => {
+    return [...acc, { path: cur.path }];
+  }, []);
+  return result;
+}
+
+export default async function Page({ params }: { params: { path: string } }) {
   const post = getPostBySlug(params.path);
 
   if (!post) return notFound();
