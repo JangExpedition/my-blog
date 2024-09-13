@@ -117,3 +117,84 @@ https://giscus.app/ko
 따라만 하면 쉽게 댓글 시스템을 적용할 수 있습니다.
 
 ## SEO
+
+## 정적 페이지 만들기
+
+Next App Router의 장점을 최대한 활용하기 위해서는 최대한 정적 페이지로 작성하는 것이 좋습니다.
+
+![npm run build 결과 로그1](/assets/blog/make-blog/8.png)
+
+`npm run build` 명령어를 통해 현재 `/`, `/posts/[path]` 경로의 페이지가 동적으로 생성되는 것을 알 수 있습니다.
+
+`/` 페이지는 카테고리와 태그에 따라 쿼리 스트링이 변경되어 사용되기 때문에 정적 페이지로 만들기는 어렵습니다. 사용자가 선택한 옵션에 따라 콘텐츠가 달라지기 때문에, 페이지를 동적으로 생성할 필요가 있습니다.
+
+```js
+export default async function Page({ params }: { params: { path: string } }) {
+  const post = getPostBySlug(params.path);
+
+  if (!post) return notFound();
+
+  return (
+    <div className="p-5 max-w-[700px] mx-auto">
+      <PostHeader
+        title={post.title}
+        coverImage={post.thumbnail}
+        date={post.createdAt}
+        tags={post.tags}
+      />
+      <PostBody content={post.content} />
+      <Giscus />
+    </div>
+  );
+}
+```
+
+하지만 `/posts/[path]` 페이지는 블로그 특성 상 정적 페이지로 변환할 수 있습니다.
+왜냐하면 현재 블로그의 글들은 마크다운 파일로 작성되며 실시간으로 변경되지 않고 배포 후에만 반영되기 때문입니다.
+빌드 타임에 `[path]`에 올 값들을 알고 있으므로 정적 페이지로 작성할 수 있습니다.
+
+```js
+import { getAllPosts, getPostBySlug } from "@/lib/api";
+import { notFound } from "next/navigation";
+import PostHeader from "@/components/post-header";
+import PostBody from "@/components/post-body";
+import Giscus from "@/components/giscus";
+
+interface IStaticParams {
+  path: string;
+}
+
+export function generateStaticParams() {
+  let allPosts = getAllPosts();
+  const result = allPosts.reduce((acc: IStaticParams[], cur) => {
+    return [...acc, { path: cur.path }];
+  }, []);
+  return result;
+}
+
+export default async function Page({ params }: { params: { path: string } }) {
+  const post = getPostBySlug(params.path);
+
+  if (!post) return notFound();
+
+  return (
+    <div className="p-5 max-w-[700px] mx-auto">
+      <PostHeader
+        title={post.title}
+        coverImage={post.thumbnail}
+        date={post.createdAt}
+        tags={post.tags}
+      />
+      <PostBody content={post.content} />
+      <Giscus />
+    </div>
+  );
+}
+```
+
+`generateStaticParams` 함수를 통해 `[path]`에 올 값들을 미리 가져와서 페이지를 생성합니다.
+
+![npm run build 결과 로그2](/assets/blog/make-blog/9.png)
+
+다시 한 번 `npm run build` 명령어를 실행하면 빌드 타임에 페이지가 생성된 것을 확인할 수 있습니다.
+덕분에 블로그를 방문해주신 분들은 로딩없이 빠르게 글을 조회할 수 있습니다.
