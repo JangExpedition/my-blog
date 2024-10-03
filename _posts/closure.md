@@ -1,6 +1,6 @@
 ---
-title: "Closuer"
-description: "JavaScript의 콜백 함수에 대해 알아봅니다."
+title: "Closure"
+description: "JavaScript의 클로저에 대해 알아봅니다."
 thumbnail: "/assets/blog/closure/cover.png"
 tags: ["JavaScript"]
 createdAt: "2024년 08월 06일"
