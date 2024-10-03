@@ -115,7 +115,7 @@ export default function Page() {
 
 ## Next.js의 데이터 패칭
 
-![Next.js의 데이터 패칭을 표현한 그림](/assets/blog/page-router/3.png)
+![Next.js의 데이터 패칭을 표현한 그림](/assets/blog/page-router/2.png)
 
 Next.js는 서버에서 사전 렌더링을 진행하는 과정에서 백엔드 서버로부터 현재 페이지에 필요한 데이터를 미리 불러오도록 설정해줄 수 있습니다.
 사전 렌더링 과정에서 React의 데이터 패칭보다 빠른 타이밍에 백엔드 서버로 부터 데이터를 요청하여 받은 데이터를 HTML에 렌더링해주기 때문에 사용자는 FCP가 끝나고 추가적으로 기다릴 필요가 없습니다.
