@@ -31,7 +31,7 @@ export function generateMetadata({
       description: `${post.description}`,
       siteName: "Tazoal Log",
       type: "website",
-      images: "/assets/blog/author/profile.png",
+      images: `${post.thumbnail}`,
     },
     verification: { google: "5Rxhu8VWiPcCxzU0LeH3eHf8lNFPickkrLJmxds1-Z8" },
   };
