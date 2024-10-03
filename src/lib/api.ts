@@ -1,6 +1,7 @@
-import { join } from "path";
+import path, { join } from "path";
 import fs from "fs";
 import matter from "gray-matter";
+import sizeOf from "image-size";
 import { Post } from "@/interfaces/post";
 
 const postsDirectory = join(process.cwd(), "_posts");
@@ -24,4 +25,11 @@ export function getAllPosts(): Post[] {
     .map((slug) => getPostBySlug(slug))
     .sort((post1, post2) => (post1.createdAt > post2.createdAt ? -1 : 1));
   return posts;
+}
+
+export function getImageSize(src: string) {
+  const imagePath = path.join(process.cwd(), "public", src);
+  const imageBuffer = fs.readFileSync(imagePath);
+  const { width, height } = sizeOf(imageBuffer);
+  return { width, height };
 }
