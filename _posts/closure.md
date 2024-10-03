@@ -13,7 +13,7 @@ https://www.inflearn.com/course/%ED%95%B5%EC%8B%AC%EA%B0%9C%EB%85%90-javascript-
 
 ---
 
-![MDN에 나와있는 Closuer 정의 1](/assets/blog/closuer/1.png)
+![MDN에 나와있는 Closuer 정의 1](/assets/blog/closure/1.png)
 
 MDN을 살펴보면 클로저는 주변 상태(Lexical Environment)에 대한 참조와 함께 번들링된 함수의 조합이라고 나와있습니다.
 번들링된 함수란 내부 함수를 의미합니다.
