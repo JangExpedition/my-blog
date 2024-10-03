@@ -23,15 +23,10 @@ export function generateMetadata({
   return {
     title: `Tazoal Log | ${post.title}`,
     description: `${post.description}`,
-    icons: {
-      icon: "./favicon.ico",
-    },
     openGraph: {
       title: `Tazoal Log | ${post.title}`,
       description: `${post.description}`,
-      siteName: "Tazoal Log",
-      type: "website",
-      images: `${post.thumbnail}`,
+      images: "/assets/blog/author/profile.png",
     },
     verification: {
       google: "5Rxhu8VWiPcCxzU0LeH3eHf8lNFPickkrLJmxds1-Z8",

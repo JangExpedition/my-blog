@@ -7,14 +7,9 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Tazoal Log",
   description: "웹 프론트엔드 개발자 장원정입니다.",
-  icons: {
-    icon: "./favicon.ico",
-  },
   openGraph: {
     title: "Tazoal Log",
     description: "웹 프론트엔드 개발자 장원정입니다.",
-    siteName: "Tazoal Log",
-    type: "website",
     images: "/assets/blog/author/profile.png",
   },
   verification: {

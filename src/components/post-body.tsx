@@ -6,14 +6,23 @@ import remarkGfm from "remark-gfm";
 
 const components = {
   img: (props: any) => {
-    const { width, height } = getImageSize(props.src);
+    const { width, height } = getImageSize(props.src) as {
+      width: number;
+      height: number;
+    };
+
+    const maxWidth = 700;
+    const ratio = height / width;
+    const adjustedWidth = width > maxWidth ? maxWidth : width;
+    const adjustedHeight = width > maxWidth ? maxWidth * ratio : height;
+
     return (
       <Image
         {...props}
         src={props.src}
         alt={props.alt}
-        width={(width as number) > 700 ? 700 : width}
-        height={height}
+        width={adjustedWidth}
+        height={adjustedHeight}
       />
     );
   },
