@@ -1,21 +1,40 @@
 import { getAllPosts, getPostBySlug } from "@/lib/api";
-import { notFound } from "next/navigation";
 import PostHeader from "@/components/post-header";
 import PostBody from "@/components/post-body";
 import Giscus from "@/components/giscus";
-
-interface IStaticParams {
-  path: string;
-}
+import { Metadata } from "next";
 
 export const dynamicParams = false;
 
 export function generateStaticParams() {
   let allPosts = getAllPosts();
-  const result = allPosts.reduce((acc: IStaticParams[], cur) => {
-    return [...acc, { path: cur.path }];
-  }, []);
-  return result;
+  return allPosts.map((post) => ({
+    path: post.path,
+  }));
+}
+
+export function generateMetadata({
+  params,
+}: {
+  params: { path: string };
+}): Metadata {
+  const post = getPostBySlug(params.path);
+
+  return {
+    title: `Tazoal Log | ${post.title}`,
+    description: `${post.description}`,
+    icons: {
+      icon: "./favicon.ico",
+    },
+    openGraph: {
+      title: `Tazoal Log | ${post.title}`,
+      description: `${post.description}`,
+      siteName: "Tazoal Log",
+      type: "website",
+      images: "/assets/blog/author/profile.png",
+    },
+    verification: { google: "5Rxhu8VWiPcCxzU0LeH3eHf8lNFPickkrLJmxds1-Z8" },
+  };
 }
 
 export default async function Page({ params }: { params: { path: string } }) {

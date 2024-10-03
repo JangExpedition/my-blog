@@ -2,6 +2,23 @@ import { getAllPosts } from "@/lib/api";
 import PostPreview from "@/components/post-preview";
 import Tag from "@/components/tag";
 import Category from "@/components/category";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Tazoal Log",
+  description: "웹 프론트엔드 개발자 장원정입니다.",
+  icons: {
+    icon: "./favicon.ico",
+  },
+  openGraph: {
+    title: "Tazoal Log",
+    description: "웹 프론트엔드 개발자 장원정입니다.",
+    siteName: "Tazoal Log",
+    type: "website",
+    images: "/assets/blog/author/profile.png",
+  },
+  verification: { google: "5Rxhu8VWiPcCxzU0LeH3eHf8lNFPickkrLJmxds1-Z8" },
+};
 
 export default function Home({
   searchParams,
