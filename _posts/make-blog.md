@@ -335,3 +335,8 @@ export function generateMetadata({
 
 포스팅 페이지의 경우 동적 경로를 적용해야 하기 때문에 `generateMetadata` 함수를 이용했습니다.
 `generateMetadata` 함수는 인자로 페이지 컴포넌트와 같은 인자를 받기 때문에 포스팅의 정보를 사용하여 포스팅별로 `meatadata`를 적용할 수 있습니다.
+
+![카카오톡에서 확인한 openGraph 결과물](/assets/blog/make-blog/13.png)
+
+`openGraph`를 이용하면 페이지의 `meta` 태그를 읽어서 위와 같은 결과물을 만들어줍니다.
+단순히 링크만 전송되는 것보다 미리보기 이미지와 설명을 제공하여 사용자 경험을 향상시킬 수 있습니다.
