@@ -2,8 +2,8 @@
 title: "Next 블로그 제작기"
 description: "Next를 활용하여 블로그를 제작한 과정을 기록했습니다."
 thumbnail: "/assets/blog/make-blog/cover.png"
-tags: ["Next.js"]
-createdAt: "2024년 09월 13일"
+tags: ["Next.js", "Project"]
+createdAt: "2024년 10월 03일"
 category: "DEV"
 ---
 
