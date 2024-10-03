@@ -17,7 +17,12 @@ export const metadata: Metadata = {
     type: "website",
     images: "/assets/blog/author/profile.png",
   },
-  verification: { google: "5Rxhu8VWiPcCxzU0LeH3eHf8lNFPickkrLJmxds1-Z8" },
+  verification: {
+    google: "5Rxhu8VWiPcCxzU0LeH3eHf8lNFPickkrLJmxds1-Z8",
+    other: {
+      "naver-site-verification": "247468c1865867ca8a22d2ae4d87f58c03bffbb8",
+    },
+  },
 };
 
 export default function Home({
