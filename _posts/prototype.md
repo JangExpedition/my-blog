@@ -154,6 +154,7 @@ prototype은 객체입니다.
 모든 데이터 타입에 대해 [[Prototype]]로 연결된 Object.prototype에는 JavaScript 전체를 통괄하는 공통된 메서드들(hasOwnProperty, toString, valueOf, isPrototypeOf 등)이 정의되어 있습니다.
 
 하지만 `Object.prototype`에 있는 메서드는 모든 데이터 타입에 적용되기 때문에 객체 전용 메서드를 정의해둘 수 없습니다.
+그렇기 때문에 `Object.prototype`에 정의하지 않고 객체 생성자 함수에 직접 메서드를 정의할 수밖에 없었습니다.
 유독 객체 관련한 명령어들은 객체로 부터 직접 호출하지 않고 `Object.명령어(자기 자신)`으로 호출하는 경우가 많습니다.
 
 ![JavaScript 프로토타입에 대한 사진 6](/assets/blog/prototype/6.png)
