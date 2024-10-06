@@ -2,7 +2,7 @@
 title: "TypeScript[탄생 배경, 타입 시스템, 동작 원리]"
 description: "TypeScript의 탄생 배경, 타입 시스템, 동작 원리에 대해 알아봅니다."
 thumbnail: "/assets/blog/typescript-1/cover.png"
-tags: ["React"]
+tags: ["TypeScript"]
 createdAt: "2024년 10월 07일"
 category: "DEV"
 ---
