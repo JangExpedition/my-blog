@@ -217,8 +217,8 @@ const response = await fetch("~/book", {캐싱 옵션});
 
 ## 페이지 재검증
 
-- `revalidatePath(`/book/${bookId}`);`: 인수로 전달한 경로의 페이지를 재검증.
-- `revalidatePath("/book/[id]", "page");`: 특정 경로의 모든 동적 페이지를 재검증.
+- `revalidatePath(페이지 경로);`: 인수로 전달한 경로의 페이지를 재검증.
+- `revalidatePath(페이지 경로, "page");`: 특정 경로의 모든 동적 페이지를 재검증.
 - `revalidatePath("/(with-searchbar)", "layout");`: 특정 레이아웃을 기준으로 모든 페이지들을 재검증하는 방식.
 - `revalidatePath("/", "layout");`: 루트 레이아웃을 넣어줌으로써 모든 데이터를 재검증하는 방식.
 - `revalidateTag(`review-${bookId}`);`: 태그값을 기준으로 데이터 캐시를 재검증하는 방식.
