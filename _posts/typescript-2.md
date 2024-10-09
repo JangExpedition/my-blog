@@ -1,6 +1,6 @@
 ---
-title: "TypeScript 문법"
-description: "TypeScript의 문법에 대해서 정리한 내용입니다."
+title: "TypeScript 기본"
+description: "TypeScript의 기본 타입에 대해서 정리한 내용입니다."
 thumbnail: "/assets/blog/typescript-2/cover.png"
 tags: ["TypeScript"]
 createdAt: "2024년 10월 07일"
