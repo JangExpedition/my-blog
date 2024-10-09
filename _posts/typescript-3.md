@@ -32,7 +32,7 @@ number 리터럴 타입은 또한 20이라는 값 하나만 포함하는 작은 
 
 #### 타입 호환성
 
-![타입 호환성을 나타낸 그림](/assets/blog/typescript-1/8.png)
+![타입 호환성을 나타낸 그림](/assets/blog/typescript-3/8.png)
 
 타입들이 계층을 이룬다는 정보를 알고 있으면 타입 호환성에 대해 이해할 수 있습니다.
 
@@ -59,7 +59,7 @@ num2 = num1; // 오류
 
 ### 타입 계층도와 함께 기본 타입 살펴보기
 
-![타입 계층도](/assets/blog/typescript-1/9.png)
+![타입 계층도](/assets/blog/typescript-3/9.png)
 
 #### Unknown 타입 & Never 타입
 
