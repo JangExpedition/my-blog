@@ -15,9 +15,9 @@ https://www.inflearn.com/course/%ED%95%9C%EC%9E%85-%ED%81%AC%EA%B8%B0-%ED%83%80%
 
 ### 인덱스 시그니처
 
-```js
+```ts
 type CountryCodes = {
-  [key: string]: string,
+  [key: string]: string;
 };
 
 let contryCodes: CountryCodes = {
@@ -36,10 +36,10 @@ let contryCodes1: CountryCodes = {};
 하지만 `contryCodes1`처럼 빈 객체를 넣어도 아무런 오류가 발생하지 않습니다.
 인덱스 시그니처는 규칙을 위반하지 않으면 모든 객체를 허용하는 타입인데 아무런 속성이 없는 객체이기 때문에 규칙을 위반할 속성이 없기 때문입니다.
 
-```js
+```ts
 type CountryCodes = {
-  [key: string]: string,
-  Korea: string,
+  [key: string]: string;
+  Korea: string;
 };
 
 let contryCodes: CountryCodes = {}; // 오류!
@@ -47,10 +47,10 @@ let contryCodes: CountryCodes = {}; // 오류!
 
 빈 객체가 들어가는 문제를 방지하기 위해 반드시 `Korea`라는 `string` 타입의 속성이 있어야 한다고 적어주면 빈 객체를 넣었을 경우 오류가 발생합니다.
 
-```js
+```ts
 type CountryCodes = {
-  [key: string]: string,
-  Korea: number,
+  [key: string]: string;
+  Korea: number;
 }; // 오류!
 
 let contryNumberAndStringCodes: CountryCodes = {
@@ -63,7 +63,7 @@ let contryNumberAndStringCodes: CountryCodes = {
 
 ### Enum
 
-```js
+```ts
 enum Role {
   ADMIN,
   USER,
