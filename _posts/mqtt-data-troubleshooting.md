@@ -3,7 +3,7 @@ title: "전송 데이터 최적화"
 description: "대용량 데이터를 디바이스로 전송하는 과정에서 발생한 문제를 해결한 경험을 정리했습니다."
 thumbnail: "/assets/blog/mqtt-data-troubleshooting/cover.png"
 tags: ["Troubleshooting"]
-createdAt: "2024년 04월 04일"
+createdAt: "2024-04-04 10:00:00"
 category: "DEV"
 ---
 

@@ -3,7 +3,7 @@ title: "ORA-00020: maximum number of processes (200) exceeded 원인과 해결"
 description: "ESP32에서 MQTT 통신으로 보낸 데이터를 받지 못하는 문제를 해결한 과정을 적었습니다."
 thumbnail: "/assets/blog/oracle-troubleshooting/cover.png"
 tags: ["Troubleshooting"]
-createdAt: "2024년 03월 27일"
+createdAt: "2024-03-27 10:00:00"
 category: "DEV"
 ---
 

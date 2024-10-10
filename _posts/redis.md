@@ -3,7 +3,7 @@ title: "Redis 구축"
 description: "1초에 10번씩 들어오는 데이터가 DB에 업데이트 되는 속도보다 빨라서 발생한 문제를 Redis를 통해 해결한 과정을 적었습니다."
 thumbnail: "/assets/blog/redis/cover.png"
 tags: ["Troubleshooting"]
-createdAt: "2024년 07월 13일"
+createdAt: "2024-07-13 10:00:00"
 category: "DEV"
 ---
 

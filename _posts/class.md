@@ -3,7 +3,7 @@ title: "Class"
 description: "JavaScript의 클래스에 대해서 알아봅니다."
 thumbnail: "/assets/blog/class/cover.png"
 tags: ["JavaScript"]
-createdAt: "2024년 08월 09일"
+createdAt: "2024-08-09 10:00:00"
 category: "DEV"
 ---
 

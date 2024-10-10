@@ -3,7 +3,7 @@ title: "Next의 도구들"
 description: "Next.js를 학습하면서 얻은 지식들을 사용법 위주로 정리했습니다."
 thumbnail: "/assets/blog/next-utils/cover.png"
 tags: ["Next.js"]
-createdAt: "2024년 10월 07일"
+createdAt: "2024-10-07 10:00:00"
 category: "DEV"
 ---
 

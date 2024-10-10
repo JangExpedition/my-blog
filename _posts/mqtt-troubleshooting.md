@@ -3,7 +3,7 @@ title: "ESP32에서 MQTT 통신으로 데이터 받기"
 description: "ESP32에서 MQTT 통신으로 보낸 데이터를 받지 못하는 문제를 해결한 과정을 적었습니다."
 thumbnail: "/assets/blog/mqtt-troubleshooting/cover.png"
 tags: ["Troubleshooting"]
-createdAt: "2024년 04월 03일"
+createdAt: "2024-04-03 10:00:00"
 category: "DEV"
 ---
 

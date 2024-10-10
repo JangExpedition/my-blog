@@ -3,7 +3,7 @@ title: "실행 컨텍스트 (Execution Context)"
 description: "JavaScript의 실행 컨텍스트에 대해서 알아보며 콜스택, 호이스팅, 스코프 체인의 개념을 학습하고 This에 대해 자세하게 알아봅니다."
 thumbnail: "/assets/blog/execution-context/cover.png"
 tags: ["JavaScript"]
-createdAt: "2024년 08월 03일"
+createdAt: "2024-08-04 10:00:00"
 category: "DEV"
 ---
 

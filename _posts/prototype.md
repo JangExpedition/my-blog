@@ -3,7 +3,7 @@ title: "Prototype"
 description: "JavaScript의 프로토타입과 프로토타입 체이닝에 대해서 알아봅니다."
 thumbnail: "/assets/blog/prototype/cover.png"
 tags: ["JavaScript"]
-createdAt: "2024년 08월 07일"
+createdAt: "2024-08-07 10:00:00"
 category: "DEV"
 ---
 

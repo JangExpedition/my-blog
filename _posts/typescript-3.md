@@ -3,7 +3,7 @@ title: "TypeScript 이해하기"
 description: "TypeScript의 타입을 이해하기 위해 정리한 내용입니다."
 thumbnail: "/assets/blog/typescript-3/cover.png"
 tags: ["TypeScript"]
-createdAt: "2024년 10월 08일"
+createdAt: "2024-10-08 10:00:00"
 category: "DEV"
 ---
 

@@ -23,8 +23,17 @@ export function getAllPosts(): Post[] {
   const slugs = getPostSlugs();
   const posts = slugs
     .map((slug) => getPostBySlug(slug))
-    .sort((post1, post2) => (post1.createdAt > post2.createdAt ? -1 : 1));
+    .sort((post1, post2) => (post1.createdAt > post2.createdAt ? -1 : 1))
+    .map((post) => ({ ...post, createdAt: formatDate(post.createdAt) }));
   return posts;
+}
+
+export function formatDate(date: string) {
+  const _date = new Date(date);
+  const year = _date.getFullYear();
+  const month = _date.getMonth() + 1;
+  const day = _date.getDate();
+  return `${year}년 ${month}월 ${day}일`;
 }
 
 export function getImageSize(src: string) {

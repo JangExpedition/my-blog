@@ -3,7 +3,7 @@ title: "App Router[페이지 라우팅, 레이아웃, React Server Component]"
 description: "App Router의 페이지 라우팅, 레이아웃, React Server Component에 대해서 알아봅니다."
 thumbnail: "/assets/blog/app-router-1/cover.png"
 tags: ["Next.js"]
-createdAt: "2024년 09월 06일"
+createdAt: "2024-09-06 10:00:00"
 category: "DEV"
 ---
 

@@ -3,7 +3,7 @@ title: "App Router[고급 라우팅 패턴, 이미지 최적화, SEO]"
 description: "App Router의 고급 라우팅 패턴, 이미지 최적화 SEO에 대해 알아봅니다."
 thumbnail: "/assets/blog/app-router-4/cover.png"
 tags: ["Next.js"]
-createdAt: "2024년 10월 06일"
+createdAt: "2024-10-06 10:00:00"
 category: "DEV"
 ---
 

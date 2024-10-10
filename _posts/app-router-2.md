@@ -3,7 +3,7 @@ title: "App Router[데이터 패칭과 페이지 캐싱]"
 description: "App Router의 데이터 패칭과 페이지 캐싱에 대해 알아봅니다."
 thumbnail: "/assets/blog/app-router-2/cover.png"
 tags: ["Next.js"]
-createdAt: "2024년 09월 15일"
+createdAt: "2024-09-15 10:00:00"
 category: "DEV"
 ---
 

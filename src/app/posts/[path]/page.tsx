@@ -1,4 +1,4 @@
-import { getAllPosts, getPostBySlug } from "@/lib/api";
+import { formatDate, getAllPosts, getPostBySlug } from "@/lib/api";
 import PostHeader from "@/components/post-header";
 import PostBody from "@/components/post-body";
 import Giscus from "@/components/giscus";
@@ -45,7 +45,7 @@ export default async function Page({ params }: { params: { path: string } }) {
       <PostHeader
         title={post.title}
         coverImage={post.thumbnail}
-        date={post.createdAt}
+        date={formatDate(post.createdAt)}
         tags={post.tags}
       />
       <PostBody content={post.content} />

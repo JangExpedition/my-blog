@@ -3,7 +3,7 @@ title: "Page Router"
 description: "React와 Next.js의 pageRouter의 렌더링 방식을 비교하며 어떤 점이 달라졌는지 살펴봅니다."
 thumbnail: "/assets/blog/page-router/cover.png"
 tags: ["Next.js"]
-createdAt: "2024년 08월 25일"
+createdAt: "2024-08-25 10:00:00"
 category: "DEV"
 ---
 

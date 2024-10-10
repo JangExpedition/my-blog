@@ -3,7 +3,7 @@ title: "TypeScript 함수와 타입"
 description: "TypeScript의 함수에 대해서 정리한 내용입니다."
 thumbnail: "/assets/blog/typescript-4/cover.png"
 tags: ["TypeScript"]
-createdAt: "2024년 10월 09일"
+createdAt: "2024-10-09 10:00:00"
 category: "DEV"
 ---
 

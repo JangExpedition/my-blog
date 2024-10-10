@@ -3,7 +3,7 @@ title: "App Router[스트리밍, 에러 핸들링, 서버 액션]"
 description: "App Router의 스트리밍, 에러 핸들링, 서버 액션에 대해 알아봅니다."
 thumbnail: "/assets/blog/app-router-3/cover.png"
 tags: ["Next.js"]
-createdAt: "2024년 10월 01일"
+createdAt: "2024-10-01 10:00:00"
 category: "DEV"
 ---
 

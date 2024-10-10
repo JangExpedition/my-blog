@@ -3,7 +3,7 @@ title: "Closure"
 description: "JavaScript의 클로저에 대해 알아봅니다."
 thumbnail: "/assets/blog/closure/cover.png"
 tags: ["JavaScript"]
-createdAt: "2024년 08월 06일"
+createdAt: "2024-08-16 10:00:00"
 category: "DEV"
 ---
 

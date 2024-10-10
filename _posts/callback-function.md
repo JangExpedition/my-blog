@@ -3,7 +3,7 @@ title: "콜백 함수 (Callback Function)"
 description: "JavaScript의 콜백 함수에 대해 알아봅니다."
 thumbnail: "/assets/blog/callback-function/cover.png"
 tags: ["JavaScript"]
-createdAt: "2024년 08월 05일"
+createdAt: "2024-08-05 10:00:00"
 category: "DEV"
 ---
 

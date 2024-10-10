@@ -3,7 +3,7 @@ title: "TypeScript 인터페이스와 클래스"
 description: "TypeScript의 인터페이스와 클래스에 대해서 정리한 내용입니다."
 thumbnail: "/assets/blog/typescript-5/cover.png"
 tags: ["TypeScript"]
-createdAt: "2024년 10월 10일"
+createdAt: "2024-10-09 11:00:00"
 category: "DEV"
 ---
 
