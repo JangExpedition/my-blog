@@ -3,7 +3,7 @@ title: "TypeScript 제네릭"
 description: "TypeScript의 제네릭에 대해서 알아봅니다."
 thumbnail: "/assets/blog/typescript-6/cover.png"
 tags: ["TypeScript"]
-createdAt: "2024-10-10 11:00:00"
+createdAt: "2024-10-15 11:00:00"
 category: "DEV"
 ---
 
