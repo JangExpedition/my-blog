@@ -29,7 +29,7 @@ let contryCodes: CountryCodes = {
 let contryCodes1: CountryCodes = {};
 ```
 
-만약 `contryCodes`를 타입 별칭으로 타입을 지정한다면 `contryCodes`에 세계 모든 국가의 코드를 모두 넣어야 한다면 타입 별칭에도 모든 요소의 `key`를 넣어줘야 합니다.
+만약 `contryCodes`를 타입 별칭으로 타입을 지정한다면 `contryCodes`에 세계 모든 국가의 코드를 모두 넣어야 할 때 타입 별칭에도 모든 요소의 `key`를 넣어줘야 합니다.
 이때 객체의 `key`와 `value`의 규칙을 기준으로 객체의 타입을 정의할 수 있는 문법이 인덱스 시그니처입니다.
 인덱스 시그니처를 이용하면 `key`와 `value`의 타입이 규칙을 가지고 움직이는 타입을 정의할 때 유용하게 사용할 수 있습니다.
 
