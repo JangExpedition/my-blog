@@ -95,7 +95,7 @@ function startAuthTimer() {
   let limitTime = 180;
 
   timerInterval = setInterval(() => {
-    const min = Math.floor(limitTime / 69);
+    const min = Math.floor(limitTime / 60);
     const sec = limitTime % 60;
 
     timer.innerText = `\${String(min).padStart(2, '0')}:\${String(sec).padStart(2, '0')}`;
@@ -203,7 +203,7 @@ function startAuthTimer() {
   let limitTime = 180;
 
   timerInterval = setInterval(() => {
-    const min = Math.floor(limitTime / 69);
+    const min = Math.floor(limitTime / 60);
     const sec = limitTime % 60;
 
     timer.innerText = `\${String(min).padStart(2, '0')}:\${String(sec).padStart(2, '0')}`;
@@ -281,7 +281,6 @@ function cancelSMS() {
   const container = document.querySelector("#auth_container");
 
   setDisabled(phone, false);
-
   setButton(document.querySelector("#send_sms_btn"), "인증", sendSMS);
   container.style.display = "none";
 }
@@ -291,8 +290,8 @@ function sendSMS() {
   const phone = document.querySelector("#user_phone");
   const container = document.querySelector("#auth_container");
 
+  timerManager.clear();
   setDisabled(phone, true);
-
   const innerHTML = `
 		<div class="spinner-border spinner-border-sm text-scecondary" role="status">
     	<span class="visually-hidden">Loading...</span>
@@ -321,11 +320,16 @@ const timerManager = (() => {
   let timerInterval = null;
   return {
     set: (interval) => {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+      }
       timerInterval = interval;
     },
-    clear: (timerInterval) => {
-      clearInterval(timerInterval);
-      timerInterval = null;
+    clear: () => {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
     },
   };
 })();
@@ -348,7 +352,7 @@ function startAuthTimer() {
   let limitTime = 180;
 
   const interval = setInterval(() => {
-    const min = Math.floor(limitTime / 69);
+    const min = Math.floor(limitTime / 60);
     const sec = limitTime % 60;
     timer.innerText = `\${String(min).padStart(2, '0')}:\${String(sec).padStart(2, '0')}`;
 
@@ -370,7 +374,7 @@ function startAuthTimer() {
 function handleAuthInput(e) {
   const code = "123123";
   if (e.target.value === code) {
-    clearInterval(timerInterval);
+    timerManager.clear();
     const button = document.getElementById("send_sms_btn");
     setDisabled(button, true);
     button.innerHTML = "인증 완료";
@@ -407,11 +411,16 @@ const timerManager = (() => {
   let timerInterval = null;
   return {
     set: (interval) => {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+      }
       timerInterval = interval;
     },
-    clear: (timerInterval) => {
-      clearInterval(timerInterval);
-      timerInterval = null;
+    clear: () => {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
     },
   };
 })();
@@ -432,8 +441,8 @@ function sendSMS() {
   const phone = document.querySelector("#user_phone");
   const container = document.querySelector("#auth_container");
 
+  timerManager.clear();
   setDisabled(phone, true);
-
   const innerHTML = `
 		<div class="spinner-border spinner-border-sm text-scecondary" role="status">
     	<span class="visually-hidden">Loading...</span>
@@ -460,7 +469,7 @@ function startAuthTimer() {
   let limitTime = 180;
 
   const interval = setInterval(() => {
-    const min = Math.floor(limitTime / 69);
+    const min = Math.floor(limitTime / 60);
     const sec = limitTime % 60;
     timer.innerText = `\${String(min).padStart(2, '0')}:\${String(sec).padStart(2, '0')}`;
 
@@ -501,4 +510,4 @@ document.addEventListener("DOMContentLoaded", (e) => {
 ```
 
 코드량이 줄어들지는 않았지만 로직이 분리되고 안정성이 조금은 높아진 느낌입니다.
-혹시라도 더 개선해야 할 점이 있으면 댓글로 알려주세요! ㅎㅎ
+더 개선해야 할 점이 있으면 댓글로 알려주세요! ㅎㅎ
