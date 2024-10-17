@@ -3,7 +3,7 @@ title: "TypeScript 조건부 타입"
 description: "TypeScript의 조건부 타입에 대해서 알아봅니다."
 thumbnail: "/assets/blog/typescript-8/cover.png"
 tags: ["TypeScript"]
-createdAt: "2024-10-17 11:00:00"
+createdAt: "2024-10-17 12:00:00"
 category: "DEV"
 ---
 
