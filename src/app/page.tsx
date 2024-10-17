@@ -18,6 +18,15 @@ export const metadata: Metadata = {
       "naver-site-verification": "247468c1865867ca8a22d2ae4d87f58c03bffbb8",
     },
   },
+  keywords: [
+    "Tazoal Log",
+    "Tazoal",
+    "타조알",
+    "타조알 로그",
+    "타조알 블로그",
+    "개발자 블로그",
+    "프론트엔드 개발자 블로그",
+  ],
 };
 
 export default function Home({
