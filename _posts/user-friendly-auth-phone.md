@@ -113,16 +113,16 @@ function startAuthTimer() {
   }, 1000);
 
   authNumber.addEventListener("keyup", (e) => {
+    const message = document.querySelector("#auth_message");
     if (e.target.value === code) {
       clearInterval(timerInterval);
       document.querySelector("#send_sms_btn").disabled = true;
-      document.querySelector("#send_sms_btn").innerHTML = "인증 완료";
-      container.innerHTML = `
-				<label class="col-sm-2 col-form-label" for=""></label>
-				<div style="color: #30BA43;" class="col-sm-10">
-					<p>인증됐습니다. 수정을 완료해주세요.</p>
-				</div>
-			`;
+      e.target.disabled = true;
+      message.style.color = "#30BA43";
+      message.innerHTML = "인증됐습니다. 수정을 완료해주세요.";
+    } else {
+      message.style.color = "#ff3e1d";
+      message.innerHTML = "인증 번호가 일치하지 않습니다.";
     }
   });
 }
@@ -140,7 +140,7 @@ function startAuthTimer() {
 ![인증 번호 입력 시간이 초과됐을 경우](/assets/blog/user-friendly-auth-phone/5.png)
 
 인터벌 함수를 실행시키고 인증 번호 입력창에 `keyup` 이벤트 리스너를 걸어줍니다.
-입력한 인증 번호가 서버로 부터 받은 인증 번호와 일치할 경우 인터벌을 중지 시키고 `container`에 인증이 완료됐음을 알려주는 메세지를 띄워줍니다.
+입력한 인증 번호가 서버로 부터 받은 인증 번호와 일치할 경우 인터벌을 중지 시키고 인증이 완료됐음을 알려주는 메세지를 띄워줍니다.
 
 ## 결과
 
@@ -221,16 +221,16 @@ function startAuthTimer() {
   }, 1000);
 
   authNumber.addEventListener("keyup", (e) => {
+    const message = document.querySelector("#auth_message");
     if (e.target.value === code) {
       clearInterval(timerInterval);
       document.querySelector("#send_sms_btn").disabled = true;
-      document.querySelector("#send_sms_btn").innerHTML = "인증 완료";
-      container.innerHTML = `
-				<label class="col-sm-2 col-form-label" for=""></label>
-				<div style="color: #30BA43;" class="col-sm-10">
-					<p>인증됐습니다. 수정을 완료해주세요.</p>
-				</div>
-			`;
+      e.target.disabled = true;
+      message.style.color = "#30BA43";
+      message.innerHTML = "인증됐습니다. 수정을 완료해주세요.";
+    } else {
+      message.style.color = "#ff3e1d";
+      message.innerHTML = "인증 번호가 일치하지 않습니다.";
     }
   });
 }
@@ -373,17 +373,27 @@ function startAuthTimer() {
 // 인증 번호 입력 핸들링 함수
 function handleAuthInput(e) {
   const code = "123123";
-  if (e.target.value === code) {
+  let value = e.target.value.replace(/[^0-9]/g, "");
+
+  if (value.length > 6) {
+    e.target.value = value.slice(0, 6);
+  } else {
+    e.target.value = value;
+  }
+
+  const message = document.querySelector("#auth_message");
+  if (value === code) {
     timerManager.clear();
     const button = document.getElementById("send_sms_btn");
     setDisabled(button, true);
     button.innerHTML = "인증 완료";
-    container.innerHTML = `
-			<label class="col-sm-2 col-form-label" for=""></label>
-			<div style="color: #30BA43;" class="col-sm-10">
-				<p>인증됐습니다. 수정을 완료해주세요.</p>
-			</div>
-		`;
+    setDisabled(e.target, true);
+
+    message.style.color = "#30BA43";
+    message.innerHTML = "인증됐습니다. 수정을 완료해주세요.";
+  } else {
+    message.style.color = "#ff3e1d";
+    message.innerHTML = "인증 번호가 일치하지 않습니다.";
   }
 }
 ```
@@ -490,17 +500,27 @@ function startAuthTimer() {
 // 인증 번호 일치 여부를 검사하는 함수
 function handleAuthInput(e) {
   const code = "123123";
-  if (e.target.value === code) {
-    clearInterval(timerInterval);
+  let value = e.target.value.replace(/[^0-9]/g, "");
+
+  if (value.length > 6) {
+    e.target.value = value.slice(0, 6);
+  } else {
+    e.target.value = value;
+  }
+
+  const message = document.querySelector("#auth_message");
+  if (value === code) {
+    timerManager.clear();
     const button = document.getElementById("send_sms_btn");
     setDisabled(button, true);
     button.innerHTML = "인증 완료";
-    container.innerHTML = `
-			<label class="col-sm-2 col-form-label" for=""></label>
-			<div style="color: #30BA43;" class="col-sm-10">
-				<p>인증됐습니다. 수정을 완료해주세요.</p>
-			</div>
-		`;
+    setDisabled(e.target, true);
+
+    message.style.color = "#30BA43";
+    message.innerHTML = "인증됐습니다. 수정을 완료해주세요.";
+  } else {
+    message.style.color = "#ff3e1d";
+    message.innerHTML = "인증 번호가 일치하지 않습니다.";
   }
 }
 
