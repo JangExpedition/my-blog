@@ -32,4 +32,5 @@ Oracle 인스턴스에서 실행 중인 프로세스 수가 데이터베이스�
 - `shutdown immediate;` 명령어로 오라클 종료 후 `startup` 명령어로 오라클을 실행했습니다.
 - 적용된 결과를 확인하기 위해 `show parameter processes` 명령어를 실행하였으나 `ora-01012:not logged on` 오류가 발생했습니다.
 - `sqlplus 사용자명/비밀번호` 명령어를 실행하여 로그인 후 실행하면 1000으로 바뀐 걸 확인할 수 있었습니다.
-  ![oracle processes를 1000으로 늘린 결과](/assets/blog/oracle-troubleshooting/1.png)
+
+![oracle processes를 1000으로 늘린 결과](/assets/blog/oracle-troubleshooting/1.png)
