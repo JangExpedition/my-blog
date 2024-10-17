@@ -13,7 +13,7 @@ category: "DEV"
 
 ## 휴대폰 번호 입력
 
-![휴대폰 번호 입력 input](/assets/blog/user-friendly-auth-phone/1.png);
+![휴대폰 번호 입력 input](/assets/blog/user-friendly-auth-phone/1.png)
 
 먼저 휴대폰 번호를 입력할 `input`과 인증 `button` 태그를 만들었습니다.
 
@@ -36,7 +36,7 @@ function autoHyphenPhone(input) {
 
 ## 휴대폰 번호 인증
 
-![휴대폰 인증 구간](/assets/blog/user-friendly-auth-phone/2.png);
+![휴대폰 인증 구간](/assets/blog/user-friendly-auth-phone/2.png)
 
 최근에 `Next.js`를 학습하면서 데이터 패칭이 되는 동안의 사용자 편의성에 대해서 생각하게 됐습니다.
 `React`의 `Suspense` 태그를 이용할 수 있으면 좋겠지만 `JavaScript`를 사용중이기 때문에 아이디어만 착안했습니다.
@@ -63,7 +63,7 @@ function sendSMS(e) {
 
 ## 휴대폰 번호 인증 문자 발송 후
 
-![휴대폰 번호 인증 문자 발송 후](/assets/blog/user-friendly-auth-phone/3.png);
+![휴대폰 번호 인증 문자 발송 후](/assets/blog/user-friendly-auth-phone/3.png)
 
 ```js
 setTimeout(() => {
@@ -128,7 +128,7 @@ function startAuthTimer() {
 }
 ```
 
-![인증 번호 입력 시간이 초과됐을 경우](/assets/blog/user-friendly-auth-phone/4.png);
+![인증 번호 입력 시간이 초과됐을 경우](/assets/blog/user-friendly-auth-phone/4.png)
 
 `startAuthTimer` 함수는 인증 번호를 입력할 수 있는 제한 시간을 나타내주는 함수입니다.
 사용자가 인증 버튼을 누르고 인증 번호를 입력하기 위해 마우스로 클릭하는 행위를 자동으로 처리해주기 위해 `authNumber.focus();`를 사용했습니다.
@@ -137,14 +137,14 @@ function startAuthTimer() {
 명시적으로 표현해주기 위해 `borderColor`와 `color`를 바꿔줬습니다.
 이렇게 설정한 색상은 `startAuthTimer`가 재시작 했을 때 다시 원래 색으로 초기화시켜줬습니다.
 
-![인증 번호 입력 시간이 초과됐을 경우](/assets/blog/user-friendly-auth-phone/5.png);
+![인증 번호 입력 시간이 초과됐을 경우](/assets/blog/user-friendly-auth-phone/5.png)
 
 인터벌 함수를 실행시키고 인증 번호 입력창에 `keyup` 이벤트 리스너를 걸어줍니다.
 입력한 인증 번호가 서버로 부터 받은 인증 번호와 일치할 경우 인터벌을 중지 시키고 `container`에 인증이 완료됐음을 알려주는 메세지를 띄워줍니다.
 
 ## 결과
 
-![최종 결과물](/assets/blog/user-friendly-auth-phone/6.gif);
+![최종 결과물](/assets/blog/user-friendly-auth-phone/6.gif)
 
 완성된 최종 결과물입니다.
 이제 NHN Cloud에서 승인이 나면 비동기 함수에 옮겨주기만 하면 원했던 기능이 구현될 것 같습니다.
