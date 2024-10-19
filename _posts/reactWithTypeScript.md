@@ -1,7 +1,7 @@
 ---
 title: "리액트와 타입스크립트"
 description: "타입스크립트 환경에서 리액트를 개발하는 방법에 대해 정리한 내용입니다."
-thumbnail: "/assets/blogWithTypeScript/cover.png"
+thumbnail: "/assets/blog/reactWithTypeScript/cover.png"
 tags: ["TypeScript", "React"]
 createdAt: "2024-10-19 12:00:00"
 category: "DEV"
