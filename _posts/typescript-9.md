@@ -23,7 +23,7 @@ interface Person {
   age: number;
 }
 
-const person1: Person<Person> = {
+const person1: Readonly<Person> = {
   name: "장원정",
   age: 32,
 };
@@ -48,9 +48,9 @@ const person2: Partial<Person> = {
 
 하지만 자주 사용되지 않는 타입들도 존재하기 때문에 가장 자주 활용되는 유틸리티 타입들을 직접 만들어보면서 살펴보겠습니다.
 
-## 맵드 타입 기반의 유틸리티 타입들 (Partial<T>, Requried<T>, Readonly<T>)
+## 맵드 타입 기반의 유틸리티 타입들 (`Partial<T>`, `Required<T>`, `Readonly<T>`)
 
-### Partial<T>
+### `Partial<T>`
 
 Partial을 직역하면 '부분적인', '일부분의'라는 뜻을 갖고 있습니다.
 Partial은 특정 객체 타입의 모든 속성을 선택적 속성으로 바꿔주는 타입입니다.
@@ -103,7 +103,7 @@ type Partial<T> = {
 
 이렇게 `Partial<T>` 타입을 직접 구현했습니다.
 
-### Required<T>
+### `Required<T>`
 
 Required 특정 객체 타입의 모든 속성을 필수 속성으로 바꿔주는 타입입니다.
 
@@ -127,7 +127,7 @@ type Required<T> = {
 `Partial`과 반대로 모든 타입을 필수 속성으로 바꿔줘야 합니다.
 이럴 때 선택적 속성이 속성명 뒤에 `?`가 붙는 건데 `?`를 없앤다는 의미로 `-?`를 붙여주면 됩니다.
 
-### Readonly<T>
+### `Readonly<T>`
 
 Readonly는 특정 객체 타입에서 모든 속성을 읽기 전용 속성으로 바꿔주는 타입입니다.
 
@@ -139,9 +139,9 @@ type Readonly<T> = {
 
 `Partial`과 `Required`와 마찬가지로 타입 변수로 만든 객체 타입을 모두 정의해준 뒤 `readonly`를 추가하면 완성됩니다.
 
-## 맵드 타입 기반의 유틸리티 타입들 2 (Pick<T, K>, Omit<T, K>, Record<V, K>)
+## 맵드 타입 기반의 유틸리티 타입들 2 (`Pick<T, K>`, `Omit<T, K>`, `Record<V, K>`)
 
-### Pick<T, K>
+### `Pick<T, K>`
 
 Pick은 객체 타입으로 부터 특정 속성만 골라내는 타입입니다.
 
@@ -191,7 +191,7 @@ type Pick<T, K extends keyof T> = {
 
 따라서 조건식이 `'title' | 'content' extends 'title' | 'tags' | 'content' | 'thumbnailURL'`이 되므로 참이 되고 `K`에 `number`를 넣으면 조건식이 일치하지 않아 오류가 발생합니다.
 
-### Omit<T, K>
+### `Omit<T, K>`
 
 Omit을 직역하면 생략하다, 빼다라는 의미로 객체 타입으로 부터 특정 속성을 제거하는 타입입니다.
 
@@ -225,99 +225,3 @@ type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 `Exclude` 타입은 분산적인 조건부 타입에서 본 내용으로 두 개의 타입 변수를 받고 첫 번째로 전달한 타입 변수에서 두 번째로 전달한 타입 변수를 제거하는 타입을 반환합니다.
 `Exclude`의 결과로 `Pick<Post, "tags" | "content" | "thumbnailURL", "title">`이 되어서 `Post` 타입에서 `tags`, `content`, `thumbnailURL`만 있는 객체 타입을 반환해줍니다.
-
-### Record<V, K>
-
-`Record` 타입은 객체 타입을 새롭게 정의할 때 인덱스 시그니처처럼 유연하지만 조금 더 제한적인 객체 타입을 정의할 때 사용되는 타입으로 실무에서 많이 사용된다고 합니다.
-
-```ts
-type Thumbnail = {
-  large: {
-    url: string;
-  };
-  medium: {
-    url: string;
-  };
-  small: {
-    url: string;
-  };
-  watch: {
-    url: string;
-  };
-};
-```
-
-`Thumbnail`을 화면에 따라 다르게 보여주는 타입을 정의한다고 가정해보겠습니다.
-하지만 위와 같이 정의하면 중복 코드가 많고 새로운 화면 유형이 추가되거나 `url` 속성명이 `urls`로 바뀐다면 번거로운 작업이 됩니다.
-
-```ts
-type Thumbnail = Record<
-  "large" | "medium" | "small" | "watch",
-  { url: string }
->;
-```
-
-이럴 때 `Record` 타입을 활용하여 위와 같이 작성하면 똑같은 타입이 만들어집니다.
-
-`Record` 타입은 객체 타입을 만들어주는 유틸리티 타입인데 첫번째 타입 변수로는 객체의 속성 `key`를 유니온으로 받고 두번째 타입 변수로 `key`들의 `value` 타입을 받습니다.
-
-`Record` 타입을 이용하면 동일한 패턴을 갖는 객체 타입을 쉽게 정의할 수 있습니다.
-
-```ts
-type Record<K extends keyof any, V> = {
-  [key in K]: V;
-};
-```
-
-`Record` 타입을 직접 정의한 내용입니다.
-`K extends keyof any`는 어떤 타입일지는 모르지만 `K`에 들어오는 것은 어떤 객체의 `key`를 추출한 유니온 타입이라는 것을 명시하는 내용입니다.
-
-## 조건부 타입 기반의 유틸리티 타입들 (Exclude<T, U>, Extract<T, U>, ReturnType<T>)
-
-Exclude<T, U>, Extract<T, U>, ReturnType<T>은 다른 포스팅에서 이미 설명드린 내용으로 직접 구현하는 부분만 작성하겠습니다.
-
-### Exclude<T, U>
-
-`Exclude`는 `T`에서 `U`를 뺀 타입입니다.
-
-```ts
-type Exclude<T, U> = T extends U ? never : T;
-
-type A = Exclude<string | boolean, boolean>; // string
-```
-
-자세히 살펴보면 조건부 타입에 유니온 타입을 전달하여 분산적인 조건부 타입이 됩니다.
-그래서 `Exclude<string | boolean> | Exclude<boolean | boolean>`이 됩니다.
-
-조건식의 결과는 `string | never`가 되고 `never`는 사라지므로 `string`이 됩니다.
-
-### Extract<T, U>
-
-`Extract`는 `T`에서 `U`를 추출한 타입입니다.
-
-```ts
-type Extract<T, U> = T extends U ? T : never;
-```
-
-### ReturnType<T>
-
-`ReturnType`은 함수의 반환값 타입을 추출하는 타입입니다.
-
-```ts
-type ReturnType<T extends (...args: any) => any> = T extends (
-  ...args: any
-) => infer R
-  ? R
-  : never;
-
-function funcA() {
-  return "string";
-}
-function funcB() {
-  return 10;
-}
-type ReturnA = ReturnType<typeof funcA>; // string
-type ReturnB = ReturnType<typeof funcB>; // number
-```
-
-동작을 자세히 살펴보면 `T`에 `()=>string` 타입이 전달되고 `infer R`은 `T`타입이 서브 타입이 되도록 하는 `R`을 추론하여 `string`이 됩니다.
