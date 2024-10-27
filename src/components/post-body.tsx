@@ -38,24 +38,32 @@ const components = {
         width={adjustedWidth}
         height={adjustedHeight}
         style={{
-          margin: "20px 0px",
+          margin: "20px auto",
           borderRadius: "4px",
         }}
       />
     );
   },
   a: (props: any) => {
-    return <a {...props} style={{ color: "#ff540f" }} />;
+    return (
+      <a
+        {...props}
+        style={{
+          color: "#ff540f",
+          wordWrap: "break-word",
+          overflowWrap: "break-word",
+          wordBreak: "break-all",
+        }}
+      />
+    );
   },
   h1: (props: any) => {
     return (
       <h1
         {...props}
         style={{
-          color: "#4C4C4C",
           fontSize: "60px",
           fontWeight: 700,
-          lineHeight: "30.6px",
           marginTop: "60px",
           marginBottom: "10px",
         }}
@@ -67,10 +75,8 @@ const components = {
       <h2
         {...props}
         style={{
-          color: "#4C4C4C",
           fontSize: "24px",
           fontWeight: 700,
-          lineHeight: "30.6px",
           marginTop: "60px",
           marginBottom: "10px",
         }}
@@ -82,10 +88,8 @@ const components = {
       <h3
         {...props}
         style={{
-          color: "#4C4C4C",
           fontSize: "22px",
           fontWeight: 700,
-          lineHeight: "30.6px",
           marginTop: "40px",
           marginBottom: "10px",
         }}
@@ -97,20 +101,8 @@ const components = {
       <p
         {...props}
         style={{
-          color: "#4C4C4C",
           fontSize: "17px",
-          lineHeight: "30.6px",
           margin: "20px 0px",
-        }}
-      />
-    );
-  },
-  pre: (props: any) => {
-    return (
-      <pre
-        {...props}
-        style={{
-          backgroundColor: "#000000",
         }}
       />
     );
@@ -119,7 +111,7 @@ const components = {
 
 export default function PostBody({ content }: { content: string }) {
   return (
-    <div className="w-full mt-8 prose dark:prose-invert">
+    <div className="w-full mt-8 prose dark:prose-invert p-2">
       <MDXRemote
         source={content}
         components={components}

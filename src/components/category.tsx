@@ -24,7 +24,7 @@ export default function Category({
             {category.selected && (
               <div
                 className={`w-[72px] absolute bottom-[-1px] h-[2px] bg-point-high left-[${
-                  (index + 1) * 70
+                  (index + 1) * 72
                 }px]`}
               ></div>
             )}

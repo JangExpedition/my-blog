@@ -5,3 +5,14 @@
 .prose {
   max-width: 100%;
 }
+
+::selection {
+  color: #ff540f;
+  background: #fff7e0;
+  text-shadow: none;
+}
+
+html.dark::selection {
+  background: red;
+  text-shadow: none;
+}

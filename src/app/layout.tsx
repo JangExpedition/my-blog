@@ -14,11 +14,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={notoSansKr.className}>
-        {/* <DarkThemeProvider> */}
-        <Header />
-        <main className="pb-[60px] bg-white dark:bg-black">{children}</main>
-        <Footer />
-        {/* </DarkThemeProvider> */}
+        <DarkThemeProvider>
+          <Header />
+          <main className="pb-[60px] bg-white dark:bg-black">{children}</main>
+          <Footer />
+        </DarkThemeProvider>
       </body>
     </html>
   );

@@ -36,7 +36,9 @@ export default function Header() {
           </p>
         </Link>
         <ul>
-          <li>{/* <ThemeButton /> */}</li>
+          <li>
+            <ThemeButton />
+          </li>
         </ul>
       </div>
       <div className="absolute bottom-0 left-0" style={borderStyle}></div>
