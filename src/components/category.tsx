@@ -23,15 +23,15 @@ export default function Category({
           <div key={category.en}>
             {category.selected && (
               <div
-                className={`w-[74px] absolute bottom-0 h-[2px] bg-gray-900 dark:bg-white left-[${
-                  (index + 1) * 74
+                className={`w-[72px] absolute bottom-[-1px] h-[2px] bg-point-high left-[${
+                  (index + 1) * 70
                 }px]`}
               ></div>
             )}
-            <div className="flex justify-center items-center relative cursor-pointer py-[10px] px-[20px]">
+            <div className="flex justify-center items-center relative cursor-pointer">
               <Link
                 href={`/?category=${category.en}`}
-                className={`font-bold text-[17px] text-left leading-[1.6] ${
+                className={`font-bold text-[17px] text-center w-[72px] h-[47px] leading-[47px] px-[20px] ${
                   category.selected
                     ? "text-gray-900 dark:text-white"
                     : "text-gray-500 dark:text-gray-400"

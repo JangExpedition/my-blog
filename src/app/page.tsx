@@ -55,29 +55,17 @@ export default function Home({
   const uniqueTags = tags.filter((tag, index) => tags.indexOf(tag) === index);
 
   return (
-    <div className="w-full flex justify-evenly">
-      <div className="flex flex-col justify-start items-center max-w-[700px] px-6 mx-auto">
-        <Category category={category} />
+    <div className="max-w-[1200px] mt-[60px] mx-auto min-h-[calc(100vh-200px)] flex flex-col justify-start items-center">
+      <Category category={category} />
+      <div className="w-full">
+        {uniqueTags.map((tagName) => (
+          <Tag key={tagName} tagName={tagName} category={category} tag={tag} />
+        ))}
+      </div>
+      <div className="flex flex-col justify-start items-center w-full px-6 mx-auto">
         {allPosts.map((post) => (
           <PostPreview key={post.path} {...post} />
         ))}
-      </div>
-      <div className="px-6 pb-12 border-l-[1px] hidden lg:block mx-auto">
-        <div className="w-[300px]">
-          <span className="text-gray-500 font-semibold text-[13px] dark:text-white">
-            태그
-          </span>
-          <div className="mt-3">
-            {uniqueTags.map((tagName) => (
-              <Tag
-                key={tagName}
-                tagName={tagName}
-                category={category}
-                tag={tag}
-              />
-            ))}
-          </div>
-        </div>
       </div>
     </div>
   );

@@ -4,37 +4,33 @@ import Tag from "./tag";
 
 export default function PostHeader({
   title,
-  coverImage,
+  description,
   date,
   tags,
+  category,
 }: {
   title: string;
-  coverImage: string;
+  description: string;
   date: string;
   tags: string[];
+  category: "DEV" | "DAILY";
 }) {
   return (
-    <div className="w-full">
-      <div className="w-full mt-9 overflow-hidden flex justify-center items-center rounded-[20px]">
-        <Image
-          src={coverImage}
-          alt={`Cover Image for ${title}`}
-          width={700}
-          height={350}
-          className="object-cover w-full"
-        />
-      </div>
-      <h1 className="mt-5 font-bold text-5xl leading-tight break-words">
-        {title}
-      </h1>
-      <div className="w-full mt-5">
-        {tags.map((tag) => (
-          <Tag key={tag} tagName={tag} />
-        ))}
-      </div>
-      <div className="mt-5 flex flex-col gap-1">
-        <Author />
-        <p className="text-sm leading-tight text-gray-400">{date}</p>
+    <div className="w-full bg-gray-100 py-[60px] mb-[48px] border-b-[1px]">
+      <div className="mx-auto max-w-[720px] px-[20px]">
+        <p className="text-point-high font-bold mb-[16px]">{category}</p>
+        <h1 className="mb-[8px] font-bold text-[32px] leading-tight break-words">
+          {title}
+        </h1>
+        <p style={{ color: "#666666" }} className="mb-[24px]">
+          {description}
+        </p>
+        <div className="w-full mb-[16px]">
+          {tags.map((tag) => (
+            <Tag key={tag} tagName={tag} />
+          ))}
+        </div>
+        <p style={{ color: "#666666" }}>{date}</p>
       </div>
     </div>
   );

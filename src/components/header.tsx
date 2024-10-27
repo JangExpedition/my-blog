@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 export default function Header() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const borderStyle = {
-    background: `linear-gradient(to right, rgba(29, 78, 216, 1) ${scrollProgress}%, #e5e7eb ${scrollProgress}%)`,
+    background: `linear-gradient(to right, rgba(255, 84, 15, 1) ${scrollProgress}%, #e5e7eb ${scrollProgress}%)`,
     height: "1px",
     width: "100%",
   };
@@ -32,13 +32,11 @@ export default function Header() {
       <div className="w-[92%] h-full flex justify-between items-center mx-auto">
         <Link href={"/"}>
           <p className="text-[24px] font-[700] italic hover:underline">
-            Tazoal<span className="text-blue-700">.</span>
+            Tazoal<span className="text-point-high">.</span>
           </p>
         </Link>
         <ul>
-          <li>
-            <ThemeButton />
-          </li>
+          <li>{/* <ThemeButton /> */}</li>
         </ul>
       </div>
       <div className="absolute bottom-0 left-0" style={borderStyle}></div>

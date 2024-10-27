@@ -41,15 +41,18 @@ export default async function Page({ params }: { params: { path: string } }) {
   const post = getPostBySlug(params.path);
 
   return (
-    <div className="p-5 max-w-[700px] mx-auto">
+    <div className="w-full mt-[60px]">
       <PostHeader
         title={post.title}
-        coverImage={post.thumbnail}
+        description={post.description}
         date={formatDate(post.createdAt)}
         tags={post.tags}
+        category={post.category}
       />
-      <PostBody content={post.content} />
-      <Giscus />
+      <div className="max-w-[720px] mx-auto">
+        <PostBody content={post.content} />
+        <Giscus />
+      </div>
     </div>
   );
 }
