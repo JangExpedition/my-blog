@@ -44,7 +44,6 @@ export default async function Page({ params }: { params: { path: string } }) {
     <div className="w-full mt-[60px]">
       <PostHeader
         title={post.title}
-        coverImage={post.thumbnail}
         description={post.description}
         date={formatDate(post.createdAt)}
         tags={post.tags}
