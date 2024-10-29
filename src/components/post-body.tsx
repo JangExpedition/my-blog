@@ -107,6 +107,9 @@ const components = {
       />
     );
   },
+  strong: (props: any) => {
+    return <strong {...props} style={{ backgroundColor: "#fff7e0" }} />;
+  },
 };
 
 export default function PostBody({ content }: { content: string }) {
