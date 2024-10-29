@@ -14,7 +14,7 @@ export default function PostHeader({
   category: "DEV" | "DAILY";
 }) {
   return (
-    <div className="w-full bg-gray-100 py-[60px] mb-[48px] border-b-[1px]">
+    <div className="w-full bg-gray-100 dark:bg-gray-900 py-[60px] mb-[48px] border-b-[1px]">
       <div className="mx-auto max-w-[720px] px-[20px]">
         <p className="text-point-high font-bold mb-[16px]">{category}</p>
         <h1 className="mb-[8px] font-bold text-[32px] leading-tight break-words">

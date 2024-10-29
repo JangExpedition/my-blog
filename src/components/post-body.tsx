@@ -108,7 +108,12 @@ const components = {
     );
   },
   strong: (props: any) => {
-    return <strong {...props} style={{ backgroundColor: "#fff7e0" }} />;
+    return (
+      <strong
+        {...props}
+        style={{ backgroundColor: "#fff7e0", color: "black" }}
+      />
+    );
   },
 };
 
