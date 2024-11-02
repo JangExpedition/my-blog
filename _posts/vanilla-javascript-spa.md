@@ -1,5 +1,5 @@
 ---
-title: "바닐라 자바스크립트로 SPA 프로젝트 만들기"
+title: "바닐라 자바스크립트로 SPA 프로젝트 만들기(작성 중)"
 description: "바닐라 자바스크립트로 간단한 SPA을 개발합니다."
 thumbnail: "/assets/blog/vanilla-javascript-spa/cover.png"
 tags: ["JavaScript"]
