@@ -89,3 +89,53 @@ console.log("🚀 ~ h2:", h2);
 ![test 프로젝트의 node_modules 폴더의 index.js 파일 실행 결과](/assets/blog/tazoal-mark/5.png)
 
 tazoal-mark-test 프로젝트에 index.js 파일을 생성하고 테스트할 코드를 작성한 다음 `node index.js`로 실행시키면 결과를 얻을 수 있다.
+
+### CommonJS와 ECMAScript Modules 모두 지원하기
+
+Node.js 12부터 ECMAScript Modules(이하 ESM)라는 새로운 모듈 시스템이 추가되면서 기존의 CJS 모듈 시스템과 ESM 모두 지원해해야 한다.
+
+**왜 둘 다 지원해야 하는가?**
+
+- ESM은 트리 쉐이킹(tree-shaking)을 통해 번들의 사이즈를 줄여 크기를 가볍게 만듬.
+- CJS는 `require/module.exports`를 동적으로 사용하는 것에 아무런 제약이 없어서 정적 분석이 어려움. 따라서 런타임에서만 모듈 관계를 파악할 수 있음.
+- ESM은 정적인 구조로 모듈끼리 의존하도록 강제화함. 따라서 빌드 단계에서 정적 분석을 통해 모듈 간의 의존 관계를 파악할 수 있고, 트리 쉐이킹을 쉽게 할 수 있음.
+
+**ESM이 더 좋은데 그럼 ESM만 지원하면 되는 거 아닌가?**
+
+- Node.js 12 전에 작성된 프로젝트와 라이브러리들은 CJS로 작성되어 있음. 따라서 두 가지 방식을 모두 지원하면 호환성을 유지하면서 새로운 ESM 기반 프로젝트에서도 최적화된 사용이 가능.
+
+CJS와 ESM을 모두 지원하기 위해서 .mjs, .cjs을 각각 작성해야 한다.
+
+```json
+{
+  "name": "tazoal-mark",
+  "version": "0.0.2",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "exports": {
+    ".": {
+      "import": "./esm/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "license": "MIT"
+}
+```
+
+파일을 구분하기 위해 ESM으로 작성된 index.mjs 파일은 esm 폴더에 넣고 CJS로 작성된 파일은 dist 폴더에 넣는다.
+사용하는 쪽에서 `"type": "module"` 설정을 넣지 않으면 기본적으로 CJS로 처리되기 때문에 `"main"`의 값을 `"./dist/index.cjs"`로 작성한다.
+
+다시 `npm publish`로 npm에 배포한 뒤 tazoal-mark-test 프로젝트에서 CJS 문법과 ESM 문법으로 작성한 뒤 `node index.js`를 하면 같은 결과를 얻을 수 있다.
+
+### TypeScript 지원하기
+
+타입스크립트 프로젝트에서도 사용하기 위해서는
+
+```ts
+export function markdownToHeadingTag(str: string): string;
+```
+
+## 참조
+
+- https://junghyeonsu.com/posts/deploy-simple-util-npm-library/
+- https://toss.tech/article/commonjs-esm-exports-field

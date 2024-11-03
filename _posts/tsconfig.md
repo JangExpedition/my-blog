@@ -1,0 +1,133 @@
+---
+title: "tsconfig 설정"
+description: "tsconfig의 설정 옵션에 대해서 알아봅니다."
+thumbnail: "/assets/blog/tsconfig/cover.png"
+tags: ["TypeScript"]
+createdAt: "2024-11-03 10:00:00"
+category: "DEV"
+---
+
+- https://evan-moon.github.io/2021/07/30/tsconfig-options-root-fields/
+- https://evan-moon.github.io/2021/08/08/tsconfig-compiler-options-type-check/
+- https://evan-moon.github.io/2021/08/22/tsconfig-compiler-options-modules/
+- https://evan-moon.github.io/2021/10/30/tsconfig-compiler-options-modules-emit/
+
+`Evan Moon` 님의 `tsconfig의 모든것`을 읽고 정리한 내용입니다.
+
+---
+
+- **include(string[])**: 컴파일에 포함될 파일들, 기본값([], ["**/*"]).
+- **files(string[])**: 컴파일할 파일을 명시적으로 작성, 값이 있다면 include의 기본값이 []로 변경되므로 include의 기본값에 의존하고 있다면 사용 시 주의가 필요함.
+- **exclude(string[])**: include에 선언한 파일 중 어떤 걸 제외할지 결정하는 옵션, 기본값(["node_modules", "bower_components", "jspm-package"]).
+- **extends**: 다른 tsconfig 파일을 상속, 새로운 필드를 작성할 경우 추가가 아닌 덮어씌워짐으로 주의.
+- **allowUnreachableCode**: 도달할 수 없는 코드(실행될 수 없는 코드)를 발견할 경우.
+  - undefined(default): 경고.
+  - true: 무시.
+  - false: 에러.
+- **noUnusedLocals**: 사용하지 않는 지역 변수
+  - true: 에러.
+  - false(default): 무시.
+- **noUnusedParameters**: 사용하지 않는 인자
+  - true: 경고.
+  - false(default): 무시.
+- **noImplicitAny**: 암묵적 any 타입
+  - true: 금지.
+  - false(default): 허용.
+- **noImplicitOverride**: 서브 클래스의 암묵적 오버라이딩
+  - true: 금지.
+  - false(default): 허용.
+- **noImplicitReturns**: 함수의 암묵적 undefined 반환
+  - true: 금지.
+  - false(default): 허용.
+- **noImplicitThis**: this가 암묵적으로 any로 평가되는 경우
+  - true: 금지.
+  - false(default): 허용.
+- **alwaysStrict**: 소스 코드 내에서 strict 룰을 위반하는 방법을 사용할 경우
+  - true: 에러.
+  - false(default): 허용.
+- **strictBindCallApply**: bind, call, apply 함수 호출 시 인자 타입 검사.
+  - true: 금지.
+  - false(default): 허용.
+- **strictFunctionTypes**
+  - ture: 함수의 인자가 반공변적인 타입으로 평가.
+  - false(default): 함수의 인자가 이변적인 타입으로 평가.
+- **strictNullChecks**: 구체적인 값이 존재해야 하는 상황에서 null, undefined 일 가능성이 존재하는 경우
+  - true: 에러.
+  - false(default): 허용.
+- **strictPropertyInitialzation**: 객체가 생성되는 시점(생성자 함수 내부)에서 멤버 변수 초기화 안 할경우
+  - true: 에러.
+  - false(default): 허용.
+- **useUnknownInCatchVariables**: catch 문의 error 인자
+  - true: unknown으로 평가(any와는 다르게 알 수 없으니 직접 정의하라는 의미, 예시: e instanceof Error).
+  - false(default): any로 평가.
+- **strict**
+  - true: strict 관련 옵션들을 일괄적으로 킴.
+  - false(default): strict 관련 옵션들을 일괄적으로 끔.
+  - strict 관련 옵션들: alwaysStrict, strictBindCallApply, strictFunctionTypes, strictNullChecks, strictPropertyInitialzation, useUnknownInCatchVariables, noImplictAny, noImplictThis
+- **exactOptionalPropertyTypes**
+  - true: 옵셔널 프리픽스가 정말 객체 내에 없다는 것을 보장.
+  - false(default): 옵셔널 프리픽스를 사용한 값에 undefined 할당 허용.
+- **noFallthroughCasesInSwitch**: switch 문 내에 Fallthrough 케이스 존재할 경우(break가 없어 switch 문 내에서 다음 케이스로 그냥 플려버리는 케이스가 있을 경우)
+  - true: 경고.
+  - false(default): 무시.
+- **noPropertyAccessFromIndexSignature**: 인덱스 시그니처로 선언된 프로퍼티에 '.'문법을 사용하여 접근할 경우
+  - true: 방어.
+  - false(default): 허용.
+- **noUncheckedIndexedAccess**
+  - true: 인덱스 시그니처로 선언된 프로퍼티를 Optional 타입(type | undefined)으로 평가.
+  - false(default): 인덱스 시그니처로 선언된 프로퍼티도 정의된 타입으로만 평가.
+- **allowUmdGlobalAccess**: umd 모듈로의 접근
+  - true: 허용.
+  - false(default): 허용하지 않음.
+- **baseUrl(string)**: 상대 경로로 모듈의 경로를 지정할 때 기준이 되는 위치를 지정.
+- **paths**: 특정 모듈 이름을 지정했을 때 컴파일러가 어디부터 모듈을 탐색해야 할지 지정할 수 있는 맵 제공, baseUrl을 기준으로 시작하므로 사용 시 주의.
+- **module(string)**
+  - CommonJS: CJS 형식으로 모듈 컴파일.
+  - AMD: Asynchronous Module Definition 형식으로 모듈 컴파일.
+  - UMD: Universal Module Definition 디자인 패턴을 사용하여 모듈 컴파일.
+  - System: System.js 형식으로 모듈 컴파일.
+  - ES6, ES2015, ES2020, ESNext: ESM 방식으로 모듈 컴파일.
+- **moduleResolution**
+  - Node: Node 전략을 사용하여 모듈을 탐색, module이 CommonJS일 경우 default.
+  - Classic: Classic 전략을 사용하여 모듈을 탐색, module이 CommonJS가 아닐 경우 default.
+- **noResolve**
+  - true: 어플리케이션에 포함된 모든 모듈을 해석.
+  - false(default): 명시적으로 어플리케이션에 포함하기로한 모듈만 해석.
+- **resolveJsonModule**: \*.json 확장자로 끝나는 모듈의 import
+  - true: 허용하지 않음.
+  - false(default): 허용.
+- **rootDir(string)**: 모듈을 컴파일한 후 어떤 디렉토리를 루트로 할지 정하는 옵션, 컴파일 대상에 아무런 영향을 미치지 않음.
+- **typeRoots(string[])**: resolve 전략에 따랄 디렉토리 탐색을 특정한 파일로 지정.
+- **declaration**
+  - true: 컴파일 시 타입 선언 파일도 생성.
+  - false(default): 컴파일 시 자바스크립트 파일만 생성.
+- **declarationDir(string)**: 타입 선언 파일을 내보낼 디렉토리 경로
+- **declarationMap**: 타입 선언과 선언 코드를 연결하는 매핑 파일
+  - true: 생성.
+  - false(default): 생성하지 않음.
+  - 매핑 파일이 없다면 IDE에서 네비게이팅 시 소스 코드가 아닌 타입 선언 파일로 이동, 이 기능을 100% 이용하기 위해서는 npm 레지스터리에 모듈을 배포할 때 반드시 소스 코드가 포함되어야함.
+- **downlevelIteration**
+  - true: ES6에 추가된 이터레이션 기능(예: for of)에 대한 명확한 구현을 함께 생성.
+  - false(default): 기본적인 트랜스파일링만 수행.
+- **emitDeclarationOnly**
+  - true: 자바스크립트 파일 없이 타입 선언 파일만 출력.
+  - false(default): 자바스크립트 파일을 포함하여 출력.
+- **importHelpers**
+  - true: 출력 파일 내에 tslib가 제공하는 헬퍼 함수들을 사용.
+  - false: tslib가 제공하는 헬퍼 함수를 사용하지 않고 직접 헬퍼 구현.
+- **importsNotUsedAsValues**
+  - remove: 출력 파일에서 런 타임 때 필요없는 import문 제거.
+  - preserve: 출력 파일에서 타입 정보는 제거하되 import문 유지.
+  - error: 타입 정보만 가져오는 import문 사용 시 error.
+- **inlineSourceMap**
+  - true: 소스맵 파일의 내용을 Base64로 인코딩하여 소스 파일에 추가.
+  - false: 소스맵 파일 따로 생성.
+- **noEmit**: 컴파일 후 출력 파일
+  - true: 내보내지 않는다.
+  - false: 내보낸다.
+- **noEmitOnError**: 컴파일 중 에러가 발생한 경우 출력 파일
+  - true: 내보내지 않는다.
+  - false: 내보낸다.
+- **preserveConstEnums**: `const enum` 키워드를 사용한 Enum 선언을 컴파일 시
+  - true: 제거하지 않는다.
+  - false: 제거한다.
