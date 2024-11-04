@@ -90,9 +90,13 @@ console.log("🚀 ~ h2:", h2);
 
 tazoal-mark-test 프로젝트에 index.js 파일을 생성하고 테스트할 코드를 작성한 다음 `node index.js`로 실행시키면 결과를 얻을 수 있다.
 
-### CommonJS와 ECMAScript Modules 모두 지원하기
+## CommonJS와 ECMAScript Modules, TypeScript 지원하기
 
-Node.js 12부터 ECMAScript Modules(이하 ESM)라는 새로운 모듈 시스템이 추가되면서 기존의 CJS 모듈 시스템과 ESM 모두 지원해해야 한다.
+npm 라이브러리를 만들면서 CJS, ECMAScript Modules(이하 ESM), TypeScript를 모두 지원하는 라이브러리로 만들 계획이다.
+
+### CJS와 ESM
+
+Node.js 12부터 ESM이라는 새로운 모듈 시스템이 추가되면서 기존의 CJS 모듈 시스템과 ESM 모두 지원해해야 한다.
 
 **왜 둘 다 지원해야 하는가?**
 
@@ -129,11 +133,65 @@ CJS와 ESM을 모두 지원하기 위해서 .mjs, .cjs을 각각 작성해야 �
 
 ### TypeScript 지원하기
 
-타입스크립트 프로젝트에서도 사용하기 위해서는
+타입스크립트 프로젝트에서도 사용하기 위해서는 라이브러리에서 사용하는 함수들의 타입 정의 파일이 필요하다.
 
 ```ts
 export function markdownToHeadingTag(str: string): string;
 ```
+
+예를 들면 위와 같은 코드가 적혀있는 index.d.ts 파일이 필요한 것이다.
+하나의 함수를 만들면 cjs, mjs, d.ts 파일을 모두 작성한다고 생각하니 너무 번거롭다.
+
+**하나의 파일을 작성하면 자동으로 cjs, mjs, d.ts 파일을 생성하게 할 수는 없을까?**
+
+결론부터 얘기하면 tsconfig 파일을 ESM, CJS 별로 각각 작성하고 packages.json에서 script에 build 명령어에 두 tsconfig를 참조해서 각각 빌드하도록 설정하면 된다.
+
+```json
+// tsconfig.json
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "declaration": true,
+    "declarationDir": "./dist/types",
+    "declarationMap": true,
+    "importHelpers": true,
+    "outDir": "dist/esm",
+    "strict": true
+  },
+  "include": ["./src/**/*.ts"]
+}
+```
+
+```json
+// tsconfig-cjs.json
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "outDir": "dist/cjs"
+  }
+}
+```
+
+ESM용 tsconfig.json 파일을 먼저 작성해줬다.
+이를 tsconfig-cjs.json에서 extends 받고 CJS 모듈 방식으로 컴파일하기 위한 옵션을 작성한다.
+extends로 상속받은 내용의 필드에 새로운 값을 추가하면 덮어씌워지기 때문에 바꿀 옵션들만 작성해준다.
+
+```json
+"build": "rm -rf dist/* && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json"
+```
+
+이제 package.json에 build 명령어를 작성해준다.
+dist 폴더 아래 내용을 모두 삭제하고 tsconfig.json으로 한 번, tsconfig-cjs.json으로 한 번 컴파일해준다.
+실제로 `yarn build` 명령어를 입력하면?
+
+![yarn build 실행 결과](/assets/blog/tazoal-mark/6.png)
+
+dist 폴더 하위에 파일이 모두 생성된 걸 확인할 수 있다.
+이로써 초기 환경 설정은 완료했다.
+이제 라이브러리를 완성시켜보자.
 
 ## 참조
 
