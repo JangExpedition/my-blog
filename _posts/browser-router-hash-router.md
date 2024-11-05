@@ -177,7 +177,15 @@ SSR을 사용할 경우 브라우저 라우터를 통해 각 페이지에 대한
 루트 경로에 server.js 파일을 생성한다.
 
 ```js
+const express = require("express");
+const path = require("path");
 
+const app = express();
+const port = 8080;
+
+app.use(express.static(path.join(__dirname, "/")));
+app.get("*", (req, res) => res.sendFile(path.join(__dirname, "/index.html")));
+app.listen(port);
 ```
 
 위와 같이 코드를 작성하면 모든 URL 요청에 index.html 파일만 반환하게 할 수 있다.
