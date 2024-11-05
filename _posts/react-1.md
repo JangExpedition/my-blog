@@ -2,7 +2,7 @@
 title: "[React 완전 정복] 리액트란 무엇이며, 왜 사용해야 할까?"
 description: "리액트와 바닐라 자바스크립트를 비교하면서 리액트의 이점에 대해 알아보자"
 thumbnail: "/assets/blog/react-1/cover.png"
-tags: ["TypeScript", "React"]
+tags: ["React"]
 createdAt: "2024-11-05 10:00:00"
 category: "DEV"
 ---
