@@ -98,3 +98,7 @@ var e = () => console.log("hi");
 `var` 키워드는 선언과 초기화가 동시에 이뤄져 `undefined`로 초기화 되지만 `let`과 `const` 키워드는 TDZ 구간을 지나 실제 초기화 되기 전까지 접근할 수 없다.
 
 `var` 키워드는 예기치 못한 버그를 불러올 수 있기 때문에 `let`과 `const`를 사용하는 것이 권장된다.
+
+### 참조
+
+- https://evan-moon.github.io/2019/06/18/javascript-let-const/
