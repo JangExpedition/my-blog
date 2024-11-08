@@ -187,6 +187,73 @@ export default useWebSocket;
 - 서버로부터 메세지를 수신할 때마다 상태를 업데이트하여 실시간 데이터를 화면에 반영할 수 있다.
 - 커스텀 훅으로 구현하여 컴포넌트는 메세지만 받아서 화면에 렌더링하는 역할에 집중할 수 있다. 이를 통해 코드의 가독성과 재사용성을 향상시켰다.
 
-## 참조
+### 지난 내역 조회 탭 - 성능 최적화를 위한 useCallback 사용
 
-- https://kciter.so/posts/about-mongodb/
+지난 내역을 조회하고 데이터를 다운로드하거나 삭제할 수 있는 기능을 구현할 때 `useCallback`을 사용해 특정 핸들러 함수들의 재생성을 방지했다.
+이를 통해 불필요한 렌더링을 줄이고 컴포넌트의 성능을 최적화하는 것을 목표로 했다.
+
+```ts
+const handleDownloadButton = useCallback(() => {
+  if (!selectedId || !startDate || !endDate) {
+    return;
+  }
+  let fileName = `[${selectedId}] ${startDate} ~ ${endDate} 데이터`;
+  let output = messages.map((msg) => JSON.stringify(msg)).join("\n");
+  const a = document.createElement("a");
+  const file = new Blob([output], {
+    type: "text/plain",
+  });
+  const url = window.URL.createObjectURL(file);
+  a.href = url;
+  a.download = fileName;
+  a.click();
+  setTimeout(() => {
+    window.URL.revokeObjectURL(url);
+  }, 3000);
+  a.remove();
+}, [selectedId, startDate, endDate, messages]);
+```
+
+`handleDownloadButton`은 사용자가 선택한 데이터를 텍스트 파일로 다운로드할 수 있는 기능이다.
+이 함수는 사용자 선택에 따라 다르게 동작해야 하기 때문에 의존성 배열에 필요한 상태값을 넣어 상태값이 변경될 때만 함수가 재생성되도록 했다.
+
+```ts
+const handleDeleteDataButton = useCallback(async () => {
+  if (!selectedId || !startDate || !endDate) {
+    return;
+  }
+
+  if (!confirm("정말로 삭제하시겠습니까?")) {
+    return;
+  }
+
+  const requestData = {
+    boardId: selectedId,
+    startDate,
+    endDate,
+  };
+
+  const response = await fetch("http://j-iot.co.kr:27018/removeData", {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(requestData),
+  });
+
+  if (!response.ok) {
+    throw new Error(`에러: ${response.status}`);
+  }
+
+  alert("삭제 완료!");
+  clearMessage();
+}, [selectedId, startDate, endDate]);
+```
+
+`handleDeleteDataButton`은 사용자로부터 특정 기간의 데이터를 삭제하는 역할을 한다.
+이 함수 또한 삭제 요청을 보내기 전에 `selectedId`, `startDate`, `endDate`의 값이 필요하며 상태값이 변결될 때만 함수를 재생성하여 성능을 최적화 시켰다.
+
+**useCallback 사용의 장점**
+
+- 불필요한 함수 재생성 방지: 매 렌더링마다 함수가 새로 정의되는 것을 방지하고 상태값이 변경될 때만 함수가 재생성되도록 했다. 이를 통해 컴포넌트 렌더링 성능을 개선할 수 있다.
+- 이 함수들이 자식 컴포넌트로 전달되는 경우 `useCallback` 덕분에 동일한 참조를 유지하여 불필요한 자식 컴포넌트의 재렌더링을 줄일 수 있다.
