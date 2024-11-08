@@ -26,7 +26,7 @@ export function generateMetadata({
     openGraph: {
       title: `Tazoal Log | ${post.title}`,
       description: `${post.description}`,
-      images: "/assets/blog/author/profile.png",
+      images: "/assets/images/profile.png",
     },
     verification: {
       google: "5Rxhu8VWiPcCxzU0LeH3eHf8lNFPickkrLJmxds1-Z8",

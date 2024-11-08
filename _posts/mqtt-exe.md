@@ -3,162 +3,190 @@ title: "MQTT 메세지를 확인하고 저장할 수 있는 exe 파일을 만들
 description: "React + Express + MongoDB + Electron + TypeScript 모두 처음 써보는 거지만 도전!"
 thumbnail: "/assets/blog/mqtt-exe/cover.png"
 tags: ["Project"]
-createdAt: "2024-11-06 10:00:00"
+createdAt: "2024-11-08 10:00:00"
 category: "DEV"
 ---
 
-회사에서 MQTT 통신으로 장비에서 받은 데이터를 실시간으로 조회하면서 제어하는 홈페이지를 만든 적이 있다.
-최근에 고객사에서 추가 발주를 할지 말지에 대해서 고민하면서 사장님(이자 임베디드 개발자)께서 걱정이 많아졌다.
+## 개요
 
-그러던 중 MQTT 토픽을 구독하여 받은 JSON 형식의 데이터를 그대로 저장하고 조회 및 다운로드 할 수 있는 프로그램을 만들면 어떻냐고 제안하셨다.
-사장님의 요구 사항은 MongoDB를 사용하고 exe 파일로 만들 것.
-최근에 리액트를 쓰고 싶다는 어필을 많이 했기 때문에 나머지 기술 스택에 대한 선택을 나에게 줬다.
+회사 사장님은 임베디드 개발자다.
+최근에 환기 장비를 납품하면서 이를 모니터링하고 제어할 수 있는 페이지를 만들었다.
+양산을 앞둔 시점에서 장비 펌웨어가 지속적으로 업데이트 되면서 사장님은 테스트 목적으로 장비에서 보내는 MQTT 데이터를 저장하고 과거 데이터를 확인할 수 있는 프로그램을 요청하셨다.
 
-React와 TypeScript는 찍먹만 해보고 Express, MongoDB, Electron 모두 처음 사용하지만 자바스크립트 환경으로 한 프로젝트를 만들어보고 싶다는 욕구가 평소에 있었기 때문에 재밌게 할 수 있을 것 같다.
+사장님의 요구사항은 아래와 같다.
 
-## 환경 설정
+- 장비에서 보내는 데이터를 그대로 저장할 것.
+- Mosquitto처럼 실시간 데이터를 볼 수 있는 화면 제공.
+- 지난 데이터를 볼 수 있고 txt 파일로 다운로드 받을 수 있는 기능.
+- exe 파일 형태로 배포.
 
-먼저 폴더를 생성하고 frontend, backend, main 폴더를 생성했다.
-그리고 `yarn init -y` 명령어를 입력하여 Node.js 환경을 구성했다.
+어떤 기술을 쓸지는 사용할지는 자유롭게 선택할 수 있었다.
+요구사항을 충족하기 위해서는 두 개의 프로젝트가 필요했다.
 
-```bash
-# Electron 설치
-yarn add -D electron
+1. MQTT Topic을 구독하여 메세지를 받아 저장하고 조회하는 API를 제공하는 서버.
+2. 서버에 저장된 데이터를 확인할 수 있는 exe 파일.
 
-# React 및 React-DOM 설치
-yarn add react react-dom
+프로젝트에서 사용한 기술 스택은 다음과 같다.
 
-# Express 설치 (백엔드)
-yarn add express
+- 서버: Express
+- 데스크톱 애플리케이션: React + Electron
+- 공통: TypeScript
+- 데이터베이스: MongoDB
 
-# MongoDB 및 Mongoose 설치 (데이터베이스)
-yarn add mongoose
+React와 TypeScript는 간단하게 시도해본 경험이 있지만 평소에 공부해왔던 것들이라 이번 기회에 직접 사용하는 경험을 할 수 있어서 선택했다.
+Express, Electron, MongoDB는 모두 처음 사용해보았지만 JavaScript를 중심으로 프로젝트를 진행해보고 싶은 마음이 있어서 도전해보고 싶었고 결과적으로 과정을 즐기면서 진행할 수 있었다.
 
-# TypeScript 설치
-yarn add  -D typescript
-yarn add -D @types/node @types/react @types/react-dom @types/express
+## 주요 기능 소개
 
-# Vite 설치
-yarn add -D vite
-yarn add -D @vitejs/plugin-react
-```
+- 실시간 데이터 수집: 장비에서 전송되는 실시간 데이터를 즉시 수집하여 MongoDB에 저장한다. 이를 통해 언제든지 과거 데이터를 빠르게 조회할 수 있다.
+- 데이터 조회 및 시각화: 사용자는 exe 파일 형태의 애플리케이션을 통해 데이터를 시각적으로 확인하고 필요한 경우 txt 파일로 데이터를 다운로드할 수 있다. 이를 통해 장비 상태를 쉽게 모니터링하고 기록할 수 있다.
+- 메세지 저장과 다운로드: 기존의 Mosquitto 클라이언트와 달리 MongoDB에 데이터를 저장하고 조회 및 다운로드하는 기능을 추가하여 장비가 과거에 보낸 데이터를 추적하고 관리할 수 있다.
 
-필요한 패키지를 설치하고 tsconfig 와 package.json 파일을 작성했다.
+## Express + MongoDB 서버 진행 과정
 
-```json
-{
-  "compilerOptions": {
-    "target": "es6", // 컴파일된 자바스크립트가 ES6(ECMAScript 2015) 문법을 따르도록 설정
-    "module": "commonjs", // Node.js 환경에서 사용되는 CommonJS 모듈 시스템을 지정 (Electron, Express와 호환)
-    "strict": true, // 엄격한 타입 검사를 활성화하여 타입 안정성을 높임
-    "jsx": "react", // React의 JSX 구문을 지원하도록 설정
-    "outDir": "./dist", // 컴파일된 자바스크립트 파일을 내보낼 디렉터리 설정 (여기서는 dist 폴더)
-    "rootDir": ".", // 소스 파일의 루트 디렉터리를 설정하여 src 폴더 안의 파일들만 컴파일
-    "esModuleInterop": true, // ES6 모듈 가져오기 방식과 호환되도록 설정 (import/export를 자유롭게 사용 가능)
-    "skipLibCheck": true, // 외부 라이브러리의 타입 검사를 건너뛰어 컴파일 속도 개선
-    "forceConsistentCasingInFileNames": true // 대소문자가 일치하지 않는 파일명 오류를 방지
-  },
-  "include": ["frontend/**/*", "backend/**/*", "main/**/*"] // 컴파일 대상 파일 지정 (여기서는 frontend, backend, main 폴더 안의 모든 파일)
-}
-```
+### MongoDB
 
-```json
-{
-  "name": "j-mqtt",
-  "version": "1.0.0",
-  "main": "./dist/main/main.js",
-  "license": "MIT",
-  "scripts": {
-    "build:ts": "tsc",
-    "build:vite": "vite build",
-    "build": "yarn build:ts && yarn build:vite",
-    "start": "yarn build && electron .",
-    "dev": "vite"
-  },
-  "devDependencies": {
-    "@types/express": "^5.0.0",
-    "@types/node": "^22.9.0",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
-    "@vitejs/plugin-react": "^4.3.3",
-    "electron": "^33.1.0",
-    "typescript": "^5.6.3",
-    "vite": "^5.4.10"
-  },
-  "dependencies": {
-    "express": "^4.21.1",
-    "mongoose": "^8.8.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
-  }
-}
-```
+MongoDB를 사용한 이유는 NoSQL이라서 빠르다는 이유였다.
+모니터링 및 제어 웹앱은 MariaDB를 사용하고 있다.
+구축 과정에서 MQTT 메세지를 빠르게 받았을 때 오류가 난 적이 있다.
+웹앱에서는 Redis를 사용하여 해결했었는데 해결 과정은 (https://tazoal.vercel.app/posts/redis)을 통해 확인할 수 있다.
 
-### 프론트엔드 설정
+**MongoDB가 빠른 이유는 뭘까?**
 
-![프론트엔드 폴더 구조](assets/blog/mqtt-exe/1.png)
+MongoDB는 NoSQL 데이터베이스다.
+NoSQL은 "Not Only SQL"의 약자로 전통적인 관계형 데이터베이스(SQL)뿐만 아니라 다양한 데이터 구조를 유현하게 처리할 수 있는 데이터베이스를 의미한다.
 
-frontend 폴더에 테스트를 위한 최소한의 파일만 작성했다.
+NoSQL 데이터베이스가 빠른 이유는 다음과 같다.
+
+- 스키마가 자유롭다: NoSQL 데이터베이스는 고정된 스키마를 사용하지 않기 때문에 데이터의 구조가 유연하다. 데이터를 저장할 때 각 행마다 다른 필드를 가질 수 있어 비정형 데이터를 쉽게 저장할 수 있다. 이 덕분에 데이터를 저장하거나 수정하는 속도가 매우 빠르고 구조를 미리 정의하지 않아도 되므로 데이터 변경 작업이 간편하다.
+- 수평적 확장: NoSQL은 수평적 확장이 용이하다. 데이터가 커질 때 서버를 추가하여 확장할 수 있다. MongoDB같은 NoSQL 데이터 베이스는 여러 서버에 데이터를 분산하여 저장할 수 있어 대량의 데이터를 처리할 때 성능 저하 없이 빠르게 작동한다.
+- key-value 저장 방식: MongoDB는 데이터를 Document 형태로 저장한다. Document는 JSON과 유사항 구조로 데이터를 key-value 형태로 관리한다. 이런 방식은 필요한 데이터를 직접적으로 접근하고 처리하기 때문에 관계형 데이터 베이스에서 발생하는 복잡한 Join 연산이 없어 성능이 매우 빠르다.
+
+**비정형 데이터란?**
+
+비정형 데이터란 고정된 구조가 없는 데이터를 의미한다. 관계형 데이터베이스에서는 데이터를 테이블의 행과 열로 정의해야 하며 이를 위해 명확한 스키마가 필요하다. 반면 비정형 데이터는 다양한 형태를 가질 수 있고 텍스트, JSON, 이미지 파일, 로그 데이터 등이 이에 해당된다.
+
+### 서버에서 MQTT 메세지를 처리하는 로직
+
+장비에서 수신한 MQTT 메세지를 효율적으로 처리하고 저장하는 것이 프로젝트의 가장 중요한 부분이었습니다.
+데이터를 실시간으로 수신하여 MongoDB에 저장하는 과정에서 비동기 처리를 사용했다.
+MongoDB의 유연한 스키마를 활용하여 장비별 데이터를 추적할 수 있도록 장비 ID를 key로 하여 배열 형태로 저장하는 방식을 채택했다.
+
+메세지 처리의 흐름은 아래와 같다.
+
+1. MQTT 메세지 수신: 장비가 MQTT 브로커로 메세지를 전송하면 이를 수신하여 JSON 형태로 파싱한다.
+2. 수신 시간 기록: 메세지에 수신 시간을 추가하여 데이터의 타임스탬프를 정확히 기록합니다.
+3. MongoDB에 저장: 장비 ID를 키로 사용하여 MongoDB에 저장하며 데이터를 배열 형태로 쌓아 과거 기록을 유지한다. 이는 장비별 데이터를 손쉽게 관리할 수 있도록 해준다.
+4. 실시간 데이터 전송: 수신된 메세지는 웹소켓을 통해 실시간으로 데스크톱 애플리케이션에 전송된다. 이를 통해 사용자는 장비 상태를 실시간으로 모니터링할 수 있다.
+
+이러한 접근은 데이터의 타입이 변경되더라도 유연하게 대처할 수 있다.
+실제로 펌웨어 업데이트 과정에서 데이터의 타입이 변경되어 웹 프로젝트에서 오류가 난 경우가 있다.
+하지만 MongoDB의 동적 스키마 덕분에 데이터 변경에도 안정적인 데이터 관리가 가능했다.
+
+**비동기 처리가 왜 효과적일까?**
+
+MQTT 메세지를 처리하고 MongoDB에 저장하는 과정에서 비동기 접근 방식을 사용한 이유는 비동기 방식이 성능상 이점을 제공하기 때문이다.
+
+비동기 처리는 MQTT 메세지를 동시에 처리함으로써 데이터를 수신하고 저장하는 동안 다른 작업이 블로킹되지 않도록 한다.
+이를 통해 시스템의 전체적인 응답 속도를 높일 수 있다.
+또한 한 번에 여러 요청을 처리할 수 있기 때문에 다수의 장비가 동시에 데이터를 전송하는 경우에도 효율적으로 대응할 수 있으며 동시성 문제를 효과적으로 해결하고 성능을 최적화할 수 있다.
+
+이런 이유로 비동기 접근 방식을 도입하여 실시간으로 들어오는 메세지를 처리하고 MongoDB에 저장하는 과정에서 높은 성능과 효율을 유지할 수 있었다.
+
+### 데이터 관리 자동화: 오래된 데이터 삭제
+
+데이터가 지속적으로 쌓이는 것을 관리하기 위해 스케줄러를 돌려 매주 월요일에 일주일 이상 된 데이터를 자동으로 삭제했다.
+이를 통해 데이터베이스의 크기를 효율적으로 관리하고 불필요한 데이터가 시스템 성능에 영향을 미치는 것을 방지할 수 있었다.
+
+이러한 주기적인 데이터 정리 작업은 데이터가 지속적으로 축적되는 상황에서도 시스템의 안정성과 성능 최적화를 유지하기 위한 전략이었다.
+
+## React + Electron 데스크톱 애플리케이션
+
+데스크톱 애플리케이션 개발을 위해 Electron을 사용했다.
+Electron을 선택한 이유는 주로 해오던 웹 개발과 동일한 기술 스택을 사용할 수 있기 때문이다.
+기존의 React와 JavaScript를 그대로 활용하여 데스크톱 애플리케이션을 만들 수 있어서 진입 장벽을 낮추고 개발 속도를 높일 수 있었다.
+
+Electron은 이 프로젝트에서 React로 개발된 웹 페이지를 데스크톱 애플리케이션으로 실행하는 역할을 맡았다.
+Electron을 사용하여 React 기반의 프론트엔드 페이지를 데스크톱 애플리케이션으로 감쌌고 실제 데이터 패칭과 같은 주요 로직은 React에서 처리했다.
+
+비록 Electron에서 복잡한 로직은 처리하지 않았지만 이미 익숙한 도구와 프레임워크를 최대한 활용하여 프로젝트를 빠르게 진행할 수 있었다.
+이로 인해 데스크톱 환경에서 웹 기술을 손쉽게 적용할 수 있었다.
+
+### Vite 사용하기
+
+기존에 React를 공부할 때는 CRA를 통해 사용했다.
+하지만 많은 개발자분들이 CRA를 사용하지말고 Vite를 사용하라는 글을 많이 봤어서 Vite를 사용하기로 했다.
+
+**Vite를 사용하면 어떤 점이 좋을까?**
+
+Vite는 CRA에 비해 여러 면에서 성능상 장점을 가지고 있다.
+Vite는 빠른 개발 서버 기동 속도와 효율적인 프로덕션 빌드를 제공하며 특히 개발 환경에서 핫 모듈 리플레이스 먼트(HMR) 속도가 빨라 코드 변경 시 즉각적인 피드백을 받을 수 있다.
+
+Vite는 ESM을 기반으로 필요한 모듈만 로드하여 개발 서버를 실행하기 때문에 기동 시간과 페이지 로딩 시간이 CRA보다 훨씬 짧아 더 나은 개발 경험을 제공한다.
+프로덕션 빌드 시에는 트리 쉐이킹과 코드 압축을 통해 최적화된 결과물을 생성하며 이를 통해 페이지의 초기 로딩 속도와 사용자 경험을 개선할 수 있다.
+
+Vite는 트리 쉐이킹, 코드 스플리팅, 압축 및 난독화 등의 최적화가 기본적으로 빌드 과정에서 수행되며 HMR 역시 기본적으로 제공된다.
+덕분에 개발자는 입장에서 별도의 설정없이도 이러한 장점들을 누릴 수 있다.
+
+**Electron은 CJS를 사용하는데 Vite의 장점이 적용될까?**
+
+Electron의 주요 환경이 Node.js 기반이기 때문에 CJS 모듈 시스템을 사용한다.
+Vite는 프론트엔드 코드를 개발하고 번들링할 때 ESM을 기반으로 작동하여 브라우저에서 더 빠른 모듈 로딩과 효율성을 제공한다.
+그렇다면 Electron과 Vite는 함께 공존할 수 있을까?
+
+프로덕션 빌드에서 Vite는 주로 프론트엔드 코드를 번들링하고 최적화하는 역할을 한다.
+이때 수행하는 작업들은 Electron에서 사용하는 모듈 시스템(CJS)과 크게 상관없이 프로덕션 환경에서의 JavaScript 파일 최적화에 집중된다.
+즉 Electron의 main.js 파일이 CJS로 작성되었다고 하더라도 Vite가 번들링하는 React 프론트엔드 코드는 다음과 같은 최적화가 적용된다.
+
+1. 트리 쉐이킹: 사용되지 않는 코드를 제거하는 트리 쉐이킹은 모듈 시스템과 상관없이 Vite의 번들링 과정에서 수행된다. 이 작업은 React 코드와 같이 브라우저에서 동작하는 부분에 적용된다.
+2. 코드 스플리팅: Vite 코드 스플리팅을 사용하여 필요한 코드만 나누어 로딩한다. 이는 번들 크기를 줄이고 최초 로딩 속도를 높이는 데 기여한다. Electron 환경에서도 이 최적화는 동일하게 적용되어 앱이 로드될 때 효율성을 제공한다.
+3. 압축 및 난독화: 최종 번들된 JavaScript 파일은 압축되고 난독화되어 네트워크 전송을 최소화하고 로딩 속도를 높인다. 이는 브라우저에서 동작하는 모든 코드에 대해 적용되며 Electron의 렌더러 프로세스에서 사용하는 프론트엔드 코드에도 적용된다.
+
+![데스크톱 애플리케이션 실행 과정](/assets/blog/mqtt-exe/1.gif)
+
+### 실시간 메세지 처리 로직
+
+실시간으로 데이터를 수신하기 위해 웹소켓을 사용했다.
+
+**웹소켓을 사용한 이유**
+
+- 실시간 반응성: 웹소켓은 HTTP 요청 없이 서버와의 지속적인 연결을 유지하므로 데이터를 수신할 때 지연이 없다. 사용자에게 즉각적인 피드백을 제공하여 실시간 모니터링 경험을 향상시킨다.
+- 서버 리소스 절약: HTTP 요청은 데이터를 전송하기 위해 여러 추가적인 정보(헤더 정보, HTTP 메서드 등)를 포함해야 하고 매번 요청을 보내야 하지만 웹소켓은 한 번 연결을 맺으면 양방향 통신을 지속한다. 처음 연결할 때만 네트워크 오버헤드가 발생하고 이후에는 데이터만 오고가기 때문에 불필요한 추가 요청없이 네트워크 사용량과 서버 부화를 최소화할 수 있다. 이로 인해 더 많은 장비와의 실시간 연결을 효율적으로 처리할 수 있다.
+
+웹소켓 연결은 다음과 같이 커스텀 훅으로 작성하여 재사용 가능하고 관리하기 쉬운 구조로 구현했다.
 
 ```ts
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import { useEffect, useState } from "react";
+import { Message } from "../interface";
 
-export default defineConfig({
-  plugins: [react()],
-  root: "./frontend",
-  base: "",
-  build: {
-    outDir: "../dist/frontend",
-  },
-});
+const useWebSocket = (activeContentIndex: number) => {
+  const [message, setMessage] = useState<Partial<Message>[]>([]);
+
+  useEffect(() => {
+    if (activeContentIndex === 0) {
+      const ws = new WebSocket("ws://j-iot.co.kr:27019");
+      ws.onmessage = (e) => {
+        const data = JSON.parse(e.data);
+        setMessage((prevMessage) => [...prevMessage, data]);
+      };
+      ws.onclose = () => {
+        console.log("웹소켓 연결 해제!");
+      };
+
+      return () => ws.close();
+    }
+  }, [activeContentIndex]);
+
+  return message;
+};
+
+export default useWebSocket;
 ```
 
-vite.config.ts 파일에서 `yarn build` 시 ./frontend 폴더 내용을 dist 폴더 아래에 frontend 폴더에 컴파일하고 빌드하도록 설정했다.
-먼저 `yarn dev`명령어를 실행해본다.
+- 첫 번째 탭이 활성화됐을 때만 웹소켓을 연결하여 데이터를 수신한다. 이를 통해 불필요한 자원 사용을 방지하고 필요한 상황에서만 연결을 유지한다.
+- 서버로부터 메세지를 수신할 때마다 상태를 업데이트하여 실시간 데이터를 화면에 반영할 수 있다.
+- 커스텀 훅으로 구현하여 컴포넌트는 메세지만 받아서 화면에 렌더링하는 역할에 집중할 수 있다. 이를 통해 코드의 가독성과 재사용성을 향상시켰다.
 
-![프론트엔드 테스트]("assets/blog/mqtt-exe/2.png)
+## 참조
 
-웹 페이지가 정상적으로 동작하는 것을 확인할 수 있다.
-
-### Electron 설정
-
-```ts
-const electron = require("electron");
-const { app, BrowserWindow } = electron;
-const path = require("path");
-
-let win: any;
-
-function createWindow() {
-  win = new BrowserWindow({ width: 800, height: 600 });
-  win.loadURL(`file://${path.join(__dirname, "../frontend/index.html")}`);
-  win.webContents.openDevTools();
-  win.on("closed", () => {
-    win = null;
-  });
-}
-
-app.on("ready", createWindow);
-
-app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
-    app.quit();
-  }
-});
-
-app.on("active", () => {
-  if (win === null) {
-    createWindow();
-  }
-});
-```
-
-main 폴더에 main.ts 파일을 생성하여 위와 같이 작성한다.
-내용은 정식 문서를 보고 작성했는데 코드를 보면 어떤 동작을 하는지 쉽게 알 수 있다.
-`yarn build` 명령어를 입력한 후에 `yarn start` 명령어를 실행해준다.
-
-![Electron.js 실행 후 나온 프로그램 화면](/assets/blog/mqtt-exe/3.png)
-
-앞서 브라우저에서 보던 화면이 별도의 프로그램으로 실행된 걸 확인할 수 있다.
-`win.webContents.openDevTools()` 메서드를 사용했기 때문에 개발자 도구 또한 볼 수 있다.
+- https://kciter.so/posts/about-mongodb/
