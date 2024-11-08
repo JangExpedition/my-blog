@@ -1,6 +1,6 @@
 ---
 title: "MQTT 메세지를 확인하고 저장할 수 있는 exe 파일을 만들어 보자."
-description: "React + Express + MongoDB + Electron + TypeScript 모두 처음 써보는 거지만 도전!"
+description: "React + Electron, Express + MongoDB를 사용하여 MQTT 메세지 모니터링 데스크톱 애플리케이션을 만든 과정을 기록했습니다."
 thumbnail: "/assets/blog/mqtt-exe/cover.png"
 tags: ["Project"]
 createdAt: "2024-11-08 10:00:00"
