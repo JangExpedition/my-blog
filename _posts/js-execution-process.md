@@ -33,9 +33,7 @@ var answer = 6 * 7;
 ```
 
 Parser는 어휘 분석 과정에서 코드를 토큰으로 분해한다.
-
 토큰은 문법적으로 더 이상 나눌 수 없는 코드의 기본 요소를 말한다.
-
 아래는 위 코드를 토큰화한 결과이다.
 
 ```js
@@ -74,7 +72,6 @@ Parser는 어휘 분석 과정에서 코드를 토큰으로 분해한다.
 **Syntax Analysis(구문 분석)**
 
 Parser는 앞서 만든 토큰을 구문 분석한다.
-
 이 때 만약 문법 에러가 있다면 에러 메세지를 출력하게 된다.
 
 ![AST](/assets/blog/js-execution-process/2.png)
@@ -88,10 +85,9 @@ Ignition은 모든 소스를 한 번에 해석하지 않고 한 줄씩 실행될
 ### TurboFan
 
 TurboFan은 JIT(Just-In-Time) 컴파일러로 Ignition이 바이트 코드 가운데 최적화가 필요한 코드를 기계어로 변환하여 CPU가 직접 처리할 수 있게 해준다.
-
 사용량이 떨어지면 디옵티마이징하여 Ignition이 바이트 코드를 해석하여 다시 실행하는 방식으로 돌아가게 하기도 한다.
 
-### 결론
+## 결론
 
 ![가위칼](/assets/blog/js-execution-process/3.png)
 
@@ -101,3 +97,8 @@ JS는 인터프리터 언어일까 컴파일 언어일까?
 잘 모르겠다.
 꼭 이분법적으로 나눠야 하나.
 'JS 코드는 인터프리터 언어의 특징과 컴파일 언어의 특징도 가지고 있다.' 정도로 이해하기로 했다.
+
+## 참조
+
+- https://ryankim.hashnode.dev/js
+- https://evan-moon.github.io/2019/06/28/v8-analysis/
