@@ -1,6 +1,6 @@
 ---
 title: "자바스크립트는 인터프리터 언어일까? 컴파일 언어일까?"
-description: "다중 패러다임, 하위 호환성 보장, 인터프리터 언어일까? 컴파일 언어일까?"
+description: "V8 엔진이 JS 코드를 실행하는 과정을 살펴보며 알아보자."
 thumbnail: "/assets/blog/js-execution-process/cover.png"
 tags: ["JavaScript"]
 createdAt: "2024-11-18 10:00:00"
